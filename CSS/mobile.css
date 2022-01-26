@@ -1,0 +1,23 @@
+:root {
+    --default-gap: 1em;
+}
+
+header, nav > ul {
+    flex-direction: column;
+}
+nav > ul  a {
+    padding: .2em 4em;
+}
+header {
+    position: initial;
+    align-items: center;
+}
+
+.secondary-info {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+}
+
+.secondary-info > h2 {
+    grid-column: auto;
+}
