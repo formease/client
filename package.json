@@ -2,9 +2,9 @@
   "name": "formease",
   "version": "0.0.0",
   "description": "need to decide yet",
-  "main": "src/index.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "node src/index.js"
+    "test": "node src/app.js"
   },
   "repository": {
     "type": "git",
