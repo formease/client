@@ -21,7 +21,8 @@ app.set('trust proxy', 1);
 app.use(rateLimiter)
 
 app.use('/', [
-    require('./routes/landing')
+    require('./routes/landing'),
+    require('./routes/auth')
 ]);
 
 app.get('*', (req, res, next) => {
