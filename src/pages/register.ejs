@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../public/styles/register.css" />
+    <script src="../public/js/register.js" defer></script>
+
+    <title>FormEase | Register</title>
+  </head>
+  <body>
+    <main>
+      <div class="back-div">
+        <div class="theme-switcher-container">
+          <button onclick="document.documentElement.dataset.theme = 'light'">Light</button>|<button
+            onclick="document.documentElement.dataset.theme = 'dark'"
+          >
+            Dark
+          </button>
+        </div>
+        <div class="mode-switcher-container" data-current-mode="register">
+          <button>Register</button><button>Signin</button>
+        </div>
+        <a href="#">Go back home &bkarow; </a>
+      </div>
+      <div>
+        <section class="register">
+          <h1>Register</h1>
+          <form class="signup-form" method="post">
+            <div>
+              <label for="signup-email">Email</label>
+              <input type="email" name="Email" id="signup-email" autocomplete="off" required />
+            </div>
+            <div>
+              <label for="signup-pass">Password</label
+              ><input type="password" name="password" id="signup-pass" required />
+              <div class="error-box"></div>
+            </div>
+            <input type="submit" value="Register" />
+          </form>
+        </section>
+        <section class="sign-in hidden">
+          <h1>Sign in</h1>
+          <form class="signin-form" method="post">
+            <div>
+              <label for="signin-email">Email</label>
+              <input type="email" name="Email" id="signin-email" autocomplete="off" required />
+            </div>
+            <div>
+              <label for="signin-pass">Password</label
+              ><input type="password" name="password" id="signin-pass" required />
+            </div>
+            <input type="submit" value="Sign in" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
