@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
   <head>
-    <!-- <%- include('../partials/head.ejs') %> -->
+    <!--<%- include('../partials/head.ejs') %> -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="../public/styles/register.css" />
-    <script src="../public/js/register.js" defer></script>
+    <script src="../public/js/register.js" type="module" unsafe-inline></script>
 
     <title>FormEase | Register</title>
   </head>
@@ -18,9 +21,7 @@
     <main>
       <div class="back-div">
         <div class="theme-switcher-container">
-          <button onclick="document.documentElement.dataset.theme = 'light'">Light</button>|<button
-            onclick="document.documentElement.dataset.theme = 'dark'"
-          >
+          <button id="light-button">Light</button>|<button id="dark-button">
             Dark
           </button>
         </div>
@@ -36,11 +37,22 @@
           <form class="signup-form" method="post">
             <div>
               <label for="signup-email">Email</label>
-              <input type="email" name="Email" id="signup-email" autocomplete="off" required />
+              <input
+                type="email"
+                name="Email"
+                id="signup-email"
+                autocomplete="off"
+                required
+              />
             </div>
             <div>
               <label for="signup-pass">Password</label
-              ><input type="password" name="password" id="signup-pass" required />
+              ><input
+                type="password"
+                name="password"
+                id="signup-pass"
+                required
+              />
               <div class="error-box"></div>
             </div>
             <input type="submit" value="Register" />
@@ -51,13 +63,26 @@
           <form class="signin-form" method="post">
             <div>
               <label for="signin-email">Email</label>
-              <input type="email" name="Email" id="signin-email" autocomplete="off" required />
+              <input
+                type="email"
+                name="Email"
+                id="signin-email"
+                autocomplete="off"
+                required
+              />
             </div>
             <div>
               <label for="signin-pass">Password</label
-              ><input type="password" name="password" id="signin-pass" required />
+              ><input
+                type="password"
+                name="password"
+                id="signin-pass"
+                required
+              />
             </div>
-            <button class="forget-password">Forgot password :(</button>
+            <button class="forget-password" type="button">
+              Forgot password :(
+            </button>
             <input type="submit" value="Sign in" />
           </form>
         </section>
