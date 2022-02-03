@@ -73,7 +73,7 @@ function inputPlaceholderEffectREMOVE(e) {
 
   let mode = URLObj.searchParams.get("mode");
 
-  if (mode.toLowerCase() == "signin") {
+  if (mode?.toLowerCase() == "signin") {
     document.querySelector(".mode-switcher-container").dataset.currentMode = "sigin";
     document.querySelector("[data-signin-switcher]").click();
   }
