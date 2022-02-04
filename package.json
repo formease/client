@@ -6,7 +6,10 @@
   "scripts": {
     "test": "nodemon src/app.js",
     "start": "node src/app.js",
-    "bat": "start.bat"
+    "bat": "start.bat",
+    "build": "esbuild src/public/js/auth.js --bundle --outfile=src/public/dist/auth.js",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "express-rate-limit": "^6.2.0",
+    "firebase": "^9.6.6",
     "helmet": "^5.0.2"
   },
   "devDependencies": {
