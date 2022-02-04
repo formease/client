@@ -8,8 +8,8 @@
     "start": "node src/app.js",
     "bat": "start.bat",
     "build": "node build.config.js",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix"
   },
   "repository": {
     "type": "git",
