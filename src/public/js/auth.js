@@ -18,4 +18,5 @@ function FirebaseInit() {
 
 (async () => {
   await FirebaseInit();
+  console.log("Firebase initialized");
 })();
