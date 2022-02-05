@@ -1,22 +1,29 @@
 const esbuild = require('esbuild')
-const Logger = require('./src/util/logger')
+const Logger = require('./src/lib/logger')
+const fs = require('fs')
 
 const logger = new Logger('FormEase', true, true)
 
-esbuild
-  .build({
-    entryPoints: ['./src/public/js/auth.js'],
-    outfile: './src/public/dist/auth.js',
-    target: 'es2021',
-    minify: true,
-    bundle: true,
-    define: {
-      'process.env.NODE_ENV': '"production"'
-    }
-  })
-  .catch((error) => {
-    console.error(error)
-  })
-  .then((d) => {
-    logger.info(`Done : ${JSON.stringify(d)}`)
-  })
+const files = fs.readdirSync('./src/public/js/')
+for (const file of files) {
+  if (file.endsWith('.js')) {
+    esbuild.build({
+      entryPoints: [`./src/public/js/${file}`],
+      outfile: `./src/public/dist/${file}`,
+      minify: true,
+      bundle: true,
+      platform: 'browser',
+      sourcemap: true,
+      define: {
+        'process.env.NODE_ENV': '"production"'
+      }
+    })
+      .catch((error) => {
+        logger.error(error)
+        process.exit(1)
+      })
+      .then((d) => {
+        logger.info(`Done | ${file} : ${JSON.stringify(d, null, 1)}`)
+      })
+  }
+}

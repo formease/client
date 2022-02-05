@@ -4,169 +4,175 @@
   box-sizing: border-box;
 }
 :root {
-    --primary-bg: #fcfae4;
-    --secondary-bg : #E6EBE0;
-    --primary-txt: rgb(71, 71, 71);
+  --primary-bg: #fcfae4;
+  --secondary-bg: #e6ebe0;
+  --primary-txt: rgb(71, 71, 71);
 
-    --default-gap: 1.2em;
+  --default-gap: 1.2em;
 }
 
 :root {
-    --step--1: clamp(0.83rem, 0.81rem + 0.13vw, 0.90rem);
-    --step-0: clamp(1.00rem, 0.95rem + 0.24vw, 1.13rem);
-    --step-1: clamp(1.20rem, 1.12rem + 0.40vw, 1.41rem);
-    --step-2: clamp(1.44rem, 1.32rem + 0.62vw, 1.76rem);
-    --step-3: clamp(1.73rem, 1.54rem + 0.92vw, 2.20rem);
+  --step--1: clamp(0.83rem, 0.81rem + 0.13vw, 0.9rem);
+  --step-0: clamp(1rem, 0.95rem + 0.24vw, 1.13rem);
+  --step-1: clamp(1.2rem, 1.12rem + 0.4vw, 1.41rem);
+  --step-2: clamp(1.44rem, 1.32rem + 0.62vw, 1.76rem);
+  --step-3: clamp(1.73rem, 1.54rem + 0.92vw, 2.2rem);
+}
 
-  }
- 
 body {
   width: 100%;
   min-height: 100vh;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
   background-color: var(--primary-bg);
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: var(--step-0);
 }
 
 body > * {
-    width: inherit;
-    padding-inline: var(--default-gap);
+  width: inherit;
+  padding-inline: var(--default-gap);
 }
 
 /* globals */
 header {
-    margin-top: .6em;
-    padding-block: var(--default-gap);
-    background: linear-gradient(to bottom, var(--primary-bg) 5%, var(--secondary-bg) );
-    box-shadow: 0 .1em .1em hsl(0, 0%, 61%);
-    position: sticky;
-    inset: 0 0 auto 0;
+  margin-top: 0.6em;
+  padding-block: var(--default-gap);
+  background: linear-gradient(
+    to bottom,
+    var(--primary-bg) 5%,
+    var(--secondary-bg)
+  );
+  box-shadow: 0 0.1em 0.1em hsl(0, 0%, 61%);
+  position: sticky;
+  inset: 0 0 auto 0;
 }
 header > :first-child {
-    font-size: var(--step-2);
+  font-size: var(--step-2);
 }
 ul {
-    list-style: none;
+  list-style: none;
 }
 a {
-    text-decoration: none;
-    color: var(--primary-txt);
-    font-weight: 900;
+  text-decoration: none;
+  color: var(--primary-txt);
+  font-weight: 900;
 }
 a:hover {
-    opacity: .7;
+  opacity: 0.7;
 }
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
-header, nav > ul {
-    display: flex;
-    justify-content: space-around;
-    gap: var(--default-gap);
-    align-items: center;
+header,
+nav > ul {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--default-gap);
+  align-items: center;
 }
-header  img {
-    max-width: 2em;
+header img {
+  max-width: 2em;
 }
-pre, code {
-    width:  min(90vw, 55em)
+pre,
+code {
+  width: min(90vw, 55em);
 }
 pre {
-    border-radius: .6em;
-    z-index: -1;
+  border-radius: 0.6em;
+  z-index: -1;
 }
 /* nav-buttons */
 .user-buttons {
-    display: flex;
-    gap: var(--default-gap)
+  display: flex;
+  gap: var(--default-gap);
 }
-.user-buttons > a, .footer__signup_btn {
-    padding: .8em 1.4em;
-    background: var(--secondary-bg);
-    border-radius: .5em;
-    box-shadow: 0 0 0 .1em  hsl(67deg 14% 64%);
+.user-buttons > a,
+.footer__signup_btn {
+  padding: 0.8em 1.4em;
+  background: var(--secondary-bg);
+  border-radius: 0.5em;
+  box-shadow: 0 0 0 0.1em hsl(67deg 14% 64%);
 }
-.user-buttons > a:active, .footer__signup_btn:active {
-    transform: scale(.98);
+.user-buttons > a:active,
+.footer__signup_btn:active {
+  transform: scale(0.98);
 }
-
 
 /* main section */
 main {
-    padding-block: 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: min(95vw, 55em);
-    margin-inline: auto;
+  padding-block: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(95vw, 55em);
+  margin-inline: auto;
 }
 .landing-section {
-    width: inherit;
+  width: inherit;
 }
-.landing-section :is(h1,h2, p) {
-    text-align: center;
-    padding-inline: var(--default-gap);
+.landing-section :is(h1, h2, p) {
+  text-align: center;
+  padding-inline: var(--default-gap);
 }
-.landing-section, .example-section {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: var(--default-gap);
+.landing-section,
+.example-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--default-gap);
 }
 .example-section {
-    width: 100%;
+  width: 100%;
 }
 .example-section > h2 {
-    align-self: flex-start
+  align-self: flex-start;
 }
 /* secondary-info */
 .secondary-info {
-    width: inherit;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: max-content 1fr;
-    gap: 2em ;
-    padding: 3em 2em;
-    margin-block: var(--default-gap);
-    border: .2rem solid hsl(67deg 14% 64%);
-    border-radius: 1em;
+  width: inherit;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: max-content 1fr;
+  gap: 2em;
+  padding: 3em 2em;
+  margin-block: var(--default-gap);
+  border: 0.2rem solid hsl(67deg 14% 64%);
+  border-radius: 1em;
 }
 .secondary-info > h2 {
-    grid-column: span 3;
-    justify-self: center;
+  grid-column: span 3;
+  justify-self: center;
 }
 .card {
-    display: grid;
-    gap: 1em;
-    text-align: center;
+  display: grid;
+  gap: 1em;
+  text-align: center;
 }
 
 /* footer */
 footer {
-    display: flex;
-    align-items:center;
-    flex-direction: column;
-    gap: 2em;
-    padding-block: var(--default-gap);
-    border-radius: .6em;
-    background: var(--secondary-bg)
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2em;
+  padding-block: var(--default-gap);
+  border-radius: 0.6em;
+  background: var(--secondary-bg);
 }
 footer > .logo {
-    font-size: var(--step-2);
-    text-decoration: underline;
-    text-underline-offset: .2em;
+  font-size: var(--step-2);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 .footer__signup {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: var(--default-gap);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--default-gap);
 }
 .footer__signup_btn {
-    padding: 1em 3em;
-    background: var(--secondary-bg);
-
+  padding: 1em 3em;
+  background: var(--secondary-bg);
 }

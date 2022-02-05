@@ -1,23 +1,24 @@
 :root {
-    --default-gap: 1em;
+  --default-gap: 1em;
 }
 
-header, nav > ul {
-    flex-direction: column;
+header,
+nav > ul {
+  flex-direction: column;
 }
-nav > ul  a {
-    padding: .2em 4em;
+nav > ul a {
+  padding: 0.2em 4em;
 }
 header {
-    position: initial;
-    align-items: center;
+  position: initial;
+  align-items: center;
 }
 
 .secondary-info {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
 }
 
 .secondary-info > h2 {
-    grid-column: auto;
+  grid-column: auto;
 }

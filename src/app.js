@@ -2,9 +2,16 @@ const express = require('express')
 const app = express()
 const helmet = require('helmet')
 const path = require('path')
-const Logger = require('./util/logger')
+const Logger = require('./lib/logger')
 const rateLimit = require('express-rate-limit')
-app.use(helmet())
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      'connect-src': ['https://*.googleapis.com']
+      // ...
+    }
+  }
+}))
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'pages'))
@@ -44,9 +51,10 @@ app.use((err, req, res, next) => {
 })
 
 const logger = new Logger('FormEase', true, true)
-const port = process.env.PORT || 3000
-app.listen(port, () => {
-  logger.info(`Server is running on port ${port}`)
+app.listen(process.env.PORT || 3000, function () {
+  logger.info(
+    `Express server listening on port ${this.address().port} in ${app.settings.env} mode`
+  )
 })
 process.on('uncaughtException', (err) => {
   logger.error(err && err.stack)
