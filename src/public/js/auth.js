@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 const FirebaseInit = () => {
   return new Promise((resolve, reject) => {
     const config = {
@@ -21,6 +21,9 @@ const stateManager = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.info('welcoming now...' + user.email)
+        if (document.getElementById('auth-page')) {
+          document.location.href = '/'
+        }
       } else {
         console.warn('onAuthStateChanged running with no user')
       }
@@ -34,6 +37,16 @@ const createUser = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .catch((error) => {
       console.error(error.code, error.message)
+      prompt('error', error.message)
+    })
+}
+
+const loginUser = (email, password) => {
+  const auth = getAuth()
+  signInWithEmailAndPassword(auth, email, password)
+    .catch((error) => {
+      console.error(error.code, error.message)
+      prompt('error', error.message)
     })
 }
 
@@ -43,13 +56,17 @@ const createUser = (email, password) => {
     await stateManager()
     document.getElementById('signup-form').addEventListener('submit', (e) => {
       e.preventDefault()
-      const userEmail = document.getElementById('signup-email').textContent
-      console.log(userEmail)
-      const userPassword = document.getElementById('signup-pass').textContent
-      console.info(userPassword)
+      const userEmail = document.getElementById('signup-email').value
+      const userPassword = document.getElementById('signup-pass').value
       createUser(userEmail, userPassword)
+    })
+    document.getElementById('signin-form').addEventListener('submit', (e) => {
+      e.preventDefault()
+      const userEmail = document.getElementById('signin-email').value
+      const userPassword = document.getElementById('signin-pass').value
+      loginUser(userEmail, userPassword)
     })
   }
 })()
 
-// # sourceMappingURL=http://localhost:3000/public/dist/auth.js.map
+// # sourceMappingURL=/public/dist/auth.js.map

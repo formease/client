@@ -4,7 +4,14 @@ const helmet = require('helmet')
 const path = require('path')
 const Logger = require('./lib/logger')
 const rateLimit = require('express-rate-limit')
-app.use(helmet())
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      'connect-src': ['https://*.googleapis.com']
+      // ...
+    }
+  }
+}))
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'pages'))
