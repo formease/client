@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const helmet = require('helmet')
 const path = require('path')
-const Logger = require('./util/logger')
+const Logger = require('./lib/logger')
 const rateLimit = require('express-rate-limit')
 app.use(helmet())
 
