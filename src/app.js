@@ -44,9 +44,10 @@ app.use((err, req, res, next) => {
 })
 
 const logger = new Logger('FormEase', true, true)
-const port = process.env.PORT || 3000
-app.listen(port, () => {
-  logger.info(`Server is running on port ${port}`)
+app.listen(process.env.PORT || 3000, function () {
+  logger.info(
+    `Express server listening on port ${this.address().port} in ${app.settings.env} mode`
+  )
 })
 process.on('uncaughtException', (err) => {
   logger.error(err && err.stack)

@@ -12,6 +12,8 @@ for (const file of files) {
       outfile: `./src/public/dist/${file}`,
       minify: true,
       bundle: true,
+      platform: 'browser',
+      sourcemap: true,
       define: {
         'process.env.NODE_ENV': '"production"'
       }
@@ -21,7 +23,7 @@ for (const file of files) {
         process.exit(1)
       })
       .then((d) => {
-        logger.info(`Done | ${file} : ${JSON.stringify(d, null, 2)}`)
+        logger.info(`Done | ${file} : ${JSON.stringify(d, null, 1)}`)
       })
   }
 }
