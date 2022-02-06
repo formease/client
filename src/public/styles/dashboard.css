@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --default-gap: 1em;
+  --primary-bg: 225, 73%, 62%;
+  --content-bg: hsl(0, 0%, 95%);
+  --bdr-clr: royalblue;
+  --scrollbar-thumb-bg: hsl(225, 73%, 87%);
+} 
+:root[data-theme="dark"] {
+  --primary-bg: 0, 0%, 25%;
+  --content-bg: hsl(0, 0%, 18%);
+  --bdr-clr: grey;
+  --scrollbar-thumb-bg: hsl(0, 0%, 73%);
+  color-scheme: dark;
+  color: white;
+}
+:root[data-theme="dark"] body {
+  background: var(--content-bg)
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(13em, 25%) 4fr;
+  grid-template-rows: max-content 1fr max-content;
+  font-family: "Rubik", sans-serif;
+}
+::-webkit-scrollbar {
+  width: .5em;
+}
+::-webkit-scrollbar-thumb{
+  background: var(--scrollbar-thumb-bg);
+  border-radius: 2em;
+}
+button {
+  font-family: "Rubik", sans-serif;
+}
+button,a {
+  letter-spacing: 0.05em;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: .5em clamp(var(--default-gap), 3vw + 1rem, 8rem);
+  background: hsla(var(--primary-bg), 0.8);
+  color: white;
+  grid-area: 1 / 1 / 2 / span 2;
+  border-radius: 0 0 .25em .25em;
+}
+aside {
+  position: absolute;
+  inset: 5em auto 0 0;
+  grid-area: 2 / 1 / 3 / 2;
+  border-radius: 0 .25em .25em 0;
+  z-index: 100;
+  transform: translateX(-100%);
+  transition: all .3s;
+}
+aside.active {
+  transform: initial;
+}
+nav {
+  display: flex;
+  gap: var(--default-gap);
+}
+nav > a {
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
+nav > a:hover {
+  opacity: 0.8;
+}
+.profile-wrapper {
+  max-width: 3em;
+}
+.profile-wrapper > img {
+  border-radius: 100%;
+  border: .15em solid var(--bdr-clr);
+  object-fit: cover;
+}
+
+main {
+  background: var(--content-bg);
+  display: flex;
+  flex-direction: column;
+  padding: var(--default-gap);
+  gap: var(--default-gap);
+  grid-area: 2 / 1 / 3 / span 2;
+}
+main > h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+main > button[data-create-project-btn] {
+  align-self: flex-start;
+  padding-block: .8em
+}
+.main__wrapper {
+  border: 0.15em solid grey;
+  border-radius: 0.4em;
+  flex: 1;
+}
+aside {
+  background: hsla(var(--primary-bg), .9);
+  border-bottom: .2em solid var(--bdr-clr);
+  border-top: .2em solid var(--bdr-clr);
+  border-right: .2em solid var(--bdr-clr);
+  padding: .5em;
+  overflow-y: auto;
+}
+aside > ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--default-gap);
+}
+#list > li {
+  padding: var(--default-gap);
+  background: var(--content-bg);
+  border-radius: .5em;
+}
+footer {
+  background: hsl(var(--primary-bg));
+  padding: var(--default-gap);
+  text-align: center; 
+  color: white;
+  font-size: 1.2rem;
+  grid-area: 3 / 1 / 4 / span 2;
+  border-radius: .25em .25em 0 0;
+}
+[data-create-project-btn] {
+  background: hsl(var(--primary-bg));
+  padding: 0.5em 0.8em;
+  border-radius: 0.4rem;
+  border: none;
+  color: whitesmoke;
+  font-weight: 700;
+  font-size: 1rem;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+[data-sidebar-toggler] {
+  padding: 0.3em 0.6em;
+  background: hsl(var(--primary-bg));
+  border-radius: 1rem;
+  border: .15em solid var(--bdr-clr);
+  color: white;
+  cursor: pointer;
+}
+/* sidebar button */ 
+[data-sidebar-toggler]:hover, [data-sidebar-toggler]:focus{
+  opacity: .6;
+}
+
+/* main button */
+main > [data-create-project-btn]::after {
+  content: ">>";
+  position: absolute;
+  left: 90%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: inherit;
+  opacity: 0;
+  transition: inherit;
+}
+main > [data-create-project-btn]:hover,
+main > [data-create-project-btn]:focus{
+  padding-inline: 1em 2em;
+}
+main > [data-create-project-btn]:hover::after,
+main > [data-create-project-btn]:focus::after {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+.theme-switcher-container {
+  cursor: pointer;
+}
+.theme-switcher-container:hover {
+  opacity: .8
+}
+
+@media (min-width: 45em) {
+  aside {
+    position: static;
+    transform: initial;
+  }
+  main {
+    grid-area: initial;
+  }
+  [data-sidebar-toggler] {
+    display: none;
+  }
+}
+@media (min-width: 80em) {
+  :root {
+    --default-gap: 1.3em;
+  }
+}
