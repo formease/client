@@ -26,6 +26,7 @@
   "homepage": "https://github.com/formease/Client#readme",
   "dependencies": {
     "colors": "^1.4.0",
+    "compression": "^1.7.4",
     "date-fns": "^2.28.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
