@@ -22,10 +22,13 @@ const stateManager = () => {
       if (user) {
         console.info('welcoming now...' + user.email)
         if (document.getElementById('auth-page')) {
-          document.location.href = '/'
+          document.location.href = '/dashboard'
         }
       } else {
         console.warn('onAuthStateChanged running with no user')
+        if (document.getElementById('dashboard-page')) {
+          document.location.href = '/auth'
+        }
       }
     })
     resolve()
@@ -52,8 +55,8 @@ const loginUser = (email, password) => {
 
 (async () => {
   await FirebaseInit()
+  await stateManager()
   if (document.getElementById('auth-page')) {
-    await stateManager()
     document.getElementById('signup-form').addEventListener('submit', (e) => {
       e.preventDefault()
       const userEmail = document.getElementById('signup-email').value

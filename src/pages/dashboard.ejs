@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head.ejs') %>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,16 +10,17 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
     <link rel="stylesheet" href="../public/styles/dashboard.css" />
-    <script src="../public/js/dashboard.js" defer></script>
+    <script src="../public/dist/dashboard.js" type="module"></script>
+    <script src="../public/dist/auth.js"></script>
 
     <title>FormEase | Dashboard</title>
   </head>
-  <body>
+  <body id="dashboard-page">
     <header>
       <button data-sidebar-toggler title="Show/hide sidebar">
         <span class="material-icons-outlined material-icons"> chevron_right </span>
       </button>
-      <nav><a href="#">Home</a><a href="#">Pricing</a></nav>
+      <nav><a href="/">Home</a><a href="#">Pricing</a></nav>
       <div class="theme-switcher-container" id="theme-toggler" title="Toggle Theme">
         <span class="material-icons-outlined material-icons"> light_mode </span>
       </div>
