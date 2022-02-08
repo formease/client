@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 :root {
-  --default-gap: 1.25em;
+  --default-gap: 1.3em;
 }
 html[data-theme="light"] {
   --primary-clr: royalblue;
@@ -48,11 +48,11 @@ input[type="submit"] {
 main {
   display: grid;
   grid-template-rows: max-content 1fr;
-  width: min(32em, 95%);
+  width: min(33em, 95%);
   padding: 2em var(--default-gap);
   gap: var(--default-gap);
   background-color: var(--primary-bg);
-  border-radius: 0.2em;
+  border-radius: 0.55em;
   box-shadow: 0 0 5px grey;
 }
 html[data-theme="dark"] main {
@@ -103,6 +103,8 @@ section > * + * {
   padding: 0.2em 0.6em;
   width: 100%;
   font-size: 1.2rem;
+  border: .15em solid grey;
+  border-radius : .35em;
 }
 :is(.signup-form, .signin-form) input[type="submit"],
 .forget-password {
@@ -115,7 +117,7 @@ section > * + * {
   opacity: 0.8;
 }
 :is(.signup-form, .signin-form) input[type="submit"] {
-  margin-top: 0.4em;
+  margin-top: 0.5em;
   border-radius: 0.3em;
   color: white;
   padding: var(--default-gap);
