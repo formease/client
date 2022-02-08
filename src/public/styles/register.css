@@ -99,24 +99,24 @@ h1 {
 section > * + * {
   margin-block-start: var(--default-gap);
 }
-:is(.signup-form, .signin-form) input:not([type="submit"]) {
+:is(.signup-form, .signin-form, .forget-password__dialog) input:not([type="submit"]) {
   padding: 0.2em 0.6em;
   width: 100%;
   font-size: 1.2rem;
   border: .15em solid grey;
   border-radius : .35em;
 }
-:is(.signup-form, .signin-form) input[type="submit"],
+:is(.signup-form, .signin-form, .forget-password__dialog) input[type="submit"],
 .forget-password {
   border: 0;
   cursor: pointer;
   font-weight: 700;
 }
-:is(.signup-form, .signin-form) input[type="submit"]:hover,
+:is(.signup-form, .signin-form, .forget-password__dialog) input[type="submit"]:hover,
 .forget-password:hover {
   opacity: 0.8;
 }
-:is(.signup-form, .signin-form) input[type="submit"] {
+:is(.signup-form, .signin-form, .forget-password__dialog) input[type="submit"] {
   margin-top: 0.5em;
   border-radius: 0.3em;
   color: white;
@@ -131,27 +131,28 @@ section > * + * {
   font-size: 0.9rem;
 }
 
-html[data-theme="dark"] :is(.signup-form, .signin-form) input:not([type="submit"]) {
+html[data-theme="dark"] :is(.signup-form, .signin-form, .forget-password__dialog) input:not([type="submit"]) {
   background: #3b3b3b;
   border: 1px solid rgb(133, 133, 133);
 }
 
-:is(.signup-form, .signin-form) > div {
+:is(.signup-form, .signin-form, .forget-password__dialog--form) > div {
   position: relative;
 }
 :is(.signup-form, .signin-form) div:first-child {
   margin-bottom: 1em;
 }
-:is(.signup-form, .signin-form) label {
+:is(.signup-form, .signin-form, .forget-password__dialog) label {
   position: absolute;
   top: 50%;
   left: 1em;
   color: grey;
   transform: translateY(-50%);
-  transition: 0.3s;
+  transition: 0.2s;
+  user-select: none;
 }
 
-:is(.signup-form, .signin-form) label.active {
+:is(.signup-form, .signin-form, .forget-password__dialog) label.active {
   transform: translateY(-201%);
   color: initial;
   left: 0;
@@ -199,6 +200,43 @@ html[data-theme="dark"] :is(.signup-form, .signin-form) input:not([type="submit"
   position: relative;
   z-index: 2;
 }
+/* forgot password dialog box */
+.forget-password__dialog {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(68, 68, 68, 0.753);
+  z-index: 2000;
+}
+.forget-password__dialog--form {
+  width:  min(25em, 90%);
+  background: var(--primary-bg);
+  padding: 2em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--default-gap);
+  border-radius: .5em
+}
+.forget-password__dialog--form > h2 {
+  margin-bottom: 1em;  
+}
+.forget-password__dialog--form > input[type="submit"] {
+  padding: .7em .8em;
+}
+.forget-password__backBtn {
+  align-self: flex-start;
+  border: .15em solid var(--primary-clr);
+  background: transparent;
+  padding: .2em;
+  border-radius: .15em;
+  cursor: pointer;
+}
+.forget-password__backBtn:hover {
+  opacity: .7;  
+}
+
 
 /* media queries */
 
