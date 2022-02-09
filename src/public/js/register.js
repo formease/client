@@ -88,15 +88,15 @@ document.querySelector('#dark-button').addEventListener('click', () => {
 
 // Forget password dialog box
 document.querySelector('.forget-password').addEventListener('click', function () {
-  let container = document.createElement('div');
+  const container = document.createElement('div')
   container.classList.add('forget-password__dialog')
-  container.innerHTML = `<form action="POST" class="forget-password__dialog--form"> <button class="forget-password__backBtn">Oh wait, I remember now!</button><h2>Change your forgotten password!</h2><div><label for="forget-password__email">Please enter your email</label><input type="email" id="forget-password__email" autocomplete="off" required></div><input type="submit" value="I forgot password :("></form>`
+  container.innerHTML = '<form action="POST" class="forget-password__dialog--form"> <button class="forget-password__backBtn">Oh wait, I remember now!</button><h2>Change your forgotten password!</h2><div><label for="forget-password__email">Please enter your email</label><input type="email" id="forget-password__email" autocomplete="off" required></div><input type="submit" value="I forgot password :("></form>'
 
   container.querySelector('.forget-password__backBtn').addEventListener('click', () => {
     container.remove()
   })
 
-  let input = container.querySelector('#forget-password__email');
+  const input = container.querySelector('#forget-password__email')
   input.addEventListener('input', inputPlaceholderEffectADD)
   input.addEventListener('blur', inputPlaceholderEffectREMOVE)
 
