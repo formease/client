@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <%- include('../partials/head.ejs') %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../public/styles/dashboard.css" />
+    <script src="../public/dist/auth.js"></script>
+    <script src="../public/dist/dashboard.js" type="module"></script>
+
+    <title>FormEase | Dashboard</title>
+  </head>
+  <body id="dashboard-page">
+    <header>
+      <button data-sidebar-toggler title="Show/hide sidebar">
+        <span class="material-icons-outlined material-icons"> chevron_right </span>
+      </button>
+      <nav><a href="/">Home</a><a href="#">Pricing</a></nav>
+      <div class="theme-switcher-container" id="theme-toggler" title="Toggle Theme">
+        <span class="material-icons-outlined material-icons"> light_mode </span>
+      </div>
+      <div class="profile-wrapper"><img src="../public/assets/avatar.png" alt="profile_photo" /></div>
+    </header>
+    <aside>
+      <ul id="list">
+        <li>Project 1</li>
+        <li>Project 2</li>
+        <li>Project 3</li>
+        <li>not projects, but something else</li>
+        <li>other stuff that will make workflow fast</li>
+        <li>Like new vs code sidebar</li>
+      </ul>
+    </aside>
+    <main>
+      <h1>FormEase | Create something!</h1>
+      <button data-create-project-btn>Create Project</button>
+      <div class="main__wrapper"></div>
+    </main>
+    <footer>Footer content..</footer>
+  </body>
+</html>
