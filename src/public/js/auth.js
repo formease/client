@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-const FirebaseInit = () => {
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+export const FirebaseInit = () => {
   return new Promise((resolve, reject) => {
     const config = {
       apiKey: 'AIzaSyCtLctmVtf5LgHJv2y4h5eVx3h6DsM4KRY',
@@ -15,12 +15,21 @@ const FirebaseInit = () => {
     resolve()
   })
 }
-const stateManager = () => {
+export const stateManager = () => {
   return new Promise((resolve, reject) => {
     const auth = getAuth()
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.info('welcoming now...' + user.email)
+        if (!user.emailVerified) {
+          sendEmailVerification(auth.currentUser)
+            .then(() => {
+              console.info('email sent')
+            }).catch((error) => {
+              console.error(error.code, error.message)
+              alert('error', error.message)
+            })
+        }
         if (document.getElementById('auth-page')) {
           document.location.href = '/dashboard'
         }
@@ -40,7 +49,7 @@ const createUser = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .catch((error) => {
       console.error(error.code, error.message)
-      prompt('error', error.message)
+      alert('error', error.message)
     })
 }
 
@@ -49,7 +58,15 @@ const loginUser = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .catch((error) => {
       console.error(error.code, error.message)
-      prompt('error', error.message)
+      alert('error', error.message)
+    }).then(() => {
+      sendEmailVerification(auth.currentUser)
+        .then(() => {
+          console.info('email sent')
+        }).catch((error) => {
+          console.error(error.code, error.message)
+          alert('error', error.message)
+        })
     })
 }
 
