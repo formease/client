@@ -38,11 +38,7 @@ body > * {
 header {
   margin-top: 0.6em;
   padding-block: var(--default-gap);
-  background: linear-gradient(
-    to bottom,
-    var(--primary-bg) 5%,
-    var(--secondary-bg)
-  );
+  background: linear-gradient(to bottom, var(--primary-bg) 5%, var(--secondary-bg));
   box-shadow: 0 0.1em 0.1em hsl(0, 0%, 61%);
   position: sticky;
   inset: 0 0 auto 0;
@@ -175,4 +171,31 @@ footer > .logo {
 .footer__signup_btn {
   padding: 1em 3em;
   background: var(--secondary-bg);
+}
+
+@media (max-width: 50em) {
+  :root {
+    --default-gap: 1em;
+  }
+
+  header,
+  nav > ul {
+    flex-direction: column;
+  }
+  nav > ul a {
+    padding: 0.2em 4em;
+  }
+  header {
+    position: initial;
+    align-items: center;
+  }
+
+  .secondary-info {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .secondary-info > h2 {
+    grid-column: auto;
+  }
 }
