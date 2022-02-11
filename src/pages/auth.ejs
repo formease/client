@@ -22,67 +22,16 @@
             Dark
           </button>
         </div>
-        <div class="mode-switcher-container" data-current-mode="register">
-          <button data-register-switcher>Register</button
-          ><button data-signin-switcher>Signin</button>
-        </div>
         <a href="/">Go back home &bkarow; </a>
       </div>
       <div>
         <section class="register">
-          <h1>Register</h1>
-          <form class="signup-form" id="signup-form">
-            <div>
-              <label for="signup-email">Email</label>
-              <input
-                type="email"
-                name="Email"
-                id="signup-email"
-                autocomplete="off"
-                required
-              />
-            </div>
-            <div>
-              <label for="signup-pass">Password</label
-              ><input
-                type="password"
-                name="password"
-                id="signup-pass"
-                required
-              />
-              <div class="error-box"></div>
-            </div>
-            <input type="submit" value="Register" />
-          </form>
+          <h1>Join Us</h1>
+          <div class="register__main">
+            <button>Join with Google <img src="../public/assets/google-logo.png" alt="google-logo"></button><button>Join with Github <img src="../public/assets/github-logo.png" alt="github-logo"></button>
+          </div>
         </section>
-        <section class="sign-in hidden">
-          <h1>Sign in</h1>
-          <form class="signin-form" id="signin-form" method="post">
-            <div>
-              <label for="signin-email">Email</label>
-              <input
-                type="email"
-                name="Email"
-                id="signin-email"
-                autocomplete="off"
-                required
-              />
-            </div>
-            <div>
-              <label for="signin-pass">Password</label
-              ><input
-                type="password"
-                name="password"
-                id="signin-pass"
-                required
-              />
-            </div>
-            <button class="forget-password" type="button">
-              Forgot password :(
-            </button>
-            <input type="submit" value="Sign in" />
-          </form>
-        </section>
+        
       </div>
     </main>
   </body>

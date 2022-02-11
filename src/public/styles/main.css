@@ -42,6 +42,7 @@ header {
   box-shadow: 0 0.1em 0.1em hsl(0, 0%, 61%);
   position: sticky;
   inset: 0 0 auto 0;
+  z-index: 100; 
 }
 header > :first-child {
   font-size: var(--step-2);
@@ -77,23 +78,25 @@ code {
 }
 pre {
   border-radius: 0.6em;
-  z-index: -1;
 }
 /* nav-buttons */
-.user-buttons {
+.user-button {
   display: flex;
   gap: var(--default-gap);
 }
-.user-buttons > a,
+.user-button > a,
 .footer__signup_btn {
   padding: 0.8em 1.4em;
   background: var(--secondary-bg);
   border-radius: 0.5em;
   box-shadow: 0 0 0 0.1em hsl(67deg 14% 64%);
 }
-.user-buttons > a:active,
+.user-button > a:active,
 .footer__signup_btn:active {
   transform: scale(0.98);
+}
+.user-button > a {
+  padding-inline: 3em;
 }
 
 /* main section */
