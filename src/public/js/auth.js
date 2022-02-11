@@ -44,7 +44,7 @@ export const stateManager = () => {
   })
 }
 
-const createUser = (email, password) => {
+export const createUser = (email, password) => {
   const auth = getAuth()
   createUserWithEmailAndPassword(auth, email, password)
     .catch((error) => {
@@ -53,7 +53,7 @@ const createUser = (email, password) => {
     })
 }
 
-const loginUser = (email, password) => {
+export const loginUser = (email, password) => {
   const auth = getAuth()
   signInWithEmailAndPassword(auth, email, password)
     .catch((error) => {
