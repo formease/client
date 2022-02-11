@@ -19,8 +19,8 @@ app.use('/public', express.static(path.resolve(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 const rateLimiter = rateLimit({
-  windowMs: 5 * 60 * 1000,
-  max: 100,
+  windowMs: 1 * 60 * 1000,
+  max: 50,
   standardHeaders: true,
   legacyHeaders: false
 })

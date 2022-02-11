@@ -1,5 +1,5 @@
 import { getAuth } from 'firebase/auth'
-import { FirebaseInit } from './auth'
+import { FirebaseInit, stateManager } from './auth'
 
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
@@ -92,6 +92,7 @@ function createPopup (titleHTML, contentHTML, permanent = false, extraHTML = '')
 
 (async () => {
   await FirebaseInit()
+  await stateManager()
 })()
 const auth = getAuth()
 /* if (!auth.currentUser.emailVerified) {
