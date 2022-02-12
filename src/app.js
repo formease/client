@@ -1,5 +1,5 @@
 const express = require('express')
-// const helmet = require('helmet')
+const helmet = require('helmet')
 const compression = require('compression')
 const cors = require('cors')
 const path = require('path')
@@ -9,17 +9,15 @@ const Logger = require('./lib/logger')
 const app = express()
 const logger = new Logger('FormEase', true, true)
 
-/* app.use(helmet({
+app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       'connect-src': ['https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
       'script-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
       'frame-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/']
     }
-  },
-  crossOriginResourcePolicy: { policy: 'cross-origin' },
-  crossOriginEmbedderPolicy: false
-})) */
+  }
+}))
 const corsOptions = {
   origin: '*',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
