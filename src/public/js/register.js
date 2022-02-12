@@ -1,7 +1,5 @@
 import { loginGoogle, FirebaseInit, stateManager } from './auth'
 
-const THEME_BTN = document.getElementById('theme-toggler')
-const currentTheme = document.documentElement.dataset.theme
 const localTheme = localStorage.getItem('theme')
 const preferedTheme = window.matchMedia('(prefers-color-scheme: dark)')
 
