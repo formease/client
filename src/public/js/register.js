@@ -1,7 +1,7 @@
-'use strict'
+import { loginGoogle, FirebaseInit, stateManager } from './auth'
 
 const THEME_BTN = document.getElementById('theme-toggler')
-let currentTheme = document.documentElement.dataset.theme
+const currentTheme = document.documentElement.dataset.theme
 const localTheme = localStorage.getItem('theme')
 const preferedTheme = window.matchMedia('(prefers-color-scheme: dark)')
 
@@ -22,3 +22,11 @@ document.querySelector('#dark-button').addEventListener('click', () => {
   document.documentElement.dataset.theme = 'dark'
   localStorage.setItem('theme', 'dark')
 })
+const runner = async () => {
+  await FirebaseInit()
+  stateManager()
+  document.getElementById('google_auth').addEventListener('click', () => {
+    loginGoogle()
+  })
+}
+runner()

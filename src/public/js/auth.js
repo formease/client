@@ -1,4 +1,6 @@
 import { initializeApp } from 'firebase/app'
+import { getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth'
+
 export const FirebaseInit = () => {
   return new Promise((resolve, reject) => {
     const config = {
@@ -12,5 +14,26 @@ export const FirebaseInit = () => {
 
     initializeApp(config)
     resolve()
+  })
+}
+
+export const loginGoogle = () => {
+  return new Promise((resolve, reject) => {
+    const auth = getAuth()
+    const provider = new GoogleAuthProvider()
+    signInWithRedirect(auth, provider)
+    resolve()
+  })
+}
+
+export const stateManager = () => {
+  const auth = getAuth()
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log('User is signed in')
+      document.location.href = '/dashboard'
+    } else {
+      console.info('no user')
+    }
   })
 }

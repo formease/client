@@ -11,10 +11,14 @@ const logger = new Logger('FormEase', true, true)
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
-      'connect-src': ['https://*.googleapis.com']
+      'connect-src': ['https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
+      'script-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
+      'frame-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/']
     }
-  }
+  },
+  crossOriginResourcePolicy: { policy: 'cross-origin' }
 }))
+
 app.use(compression())
 app.use('/public', express.static(path.resolve(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
