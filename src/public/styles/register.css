@@ -12,16 +12,13 @@ html[data-theme="light"] {
   --secondary-bg: lightgrey;
 }
 html[data-theme="dark"] {
-  --primary-clr: rgb(78, 122, 255);
+  --primary-clr: rgb(65, 113, 255);
   --primary-bg: hsl(0, 0%, 15%);
   --secondary-bg: hsl(0, 0%, 7%);
   color-scheme: dark;
   color: white;
 }
 html[data-theme="dark"] button {
-  color: white;
-}
-html[data-theme="dark"] label {
   color: white;
 }
 html[data-theme="light"] .theme-switcher-container button:first-child {
@@ -39,8 +36,7 @@ body {
   background: var(--secondary-bg);
   font-family: "Rubik", sans-serif;
 }
-button,
-input[type="submit"] {
+button{
   font-family: "Rubik", sans-serif;
   letter-spacing: 0.077em;
 }
@@ -60,10 +56,13 @@ html[data-theme="dark"] main {
 }
 h1 {
   font-size: 2rem;
-  margin-bottom: 1.2em;
+  margin-block: .3em 1.2em;
+  text-align: center;
+
 }
-.hidden {
-  display: none;
+img {
+  max-width: 100%;
+  height: auto;
 }
 /* go-back section */
 .back-div {
@@ -90,175 +89,34 @@ h1 {
   opacity: 0.7;
 }
 /* register and sign-in  */
-.register,
-.sign-in {
+.register {
   width: 100%;
   height: 100%;
 }
-
-section > * + * {
-  margin-block-start: var(--default-gap);
-}
-:is(.signup-form, .signin-form, .forget-password__dialog) input:not([type="submit"]) {
-  padding: 0.2em 0.6em;
-  width: 100%;
-  font-size: 1.2rem;
-  border: .15em solid grey;
-  border-radius : .35em;
-}
-:is(.signup-form, .signin-form, .forget-password__dialog) input[type="submit"],
-.forget-password {
+.register button {
+  margin-top: 0.5em;
+  border-radius: 0.3em;
+  color: white;
+  padding: .8em 1em;
+  background: var(--primary-clr);
   border: 0;
   cursor: pointer;
   font-weight: 700;
 }
-:is(.signup-form, .signin-form, .forget-password__dialog) input[type="submit"]:hover,
-.forget-password:hover {
+.register button:hover {
   opacity: 0.8;
 }
-:is(.signup-form, .signin-form, .forget-password__dialog) input[type="submit"] {
-  margin-top: 0.5em;
-  border-radius: 0.3em;
-  color: white;
-  padding: var(--default-gap);
-  align-self: flex-end;
-  background: var(--primary-clr);
-}
-.forget-password {
-  align-self: flex-start;
-  background: none;
-  color: var(--primary-clr);
-  font-size: 0.9rem;
+.register button img {
+  vertical-align: middle;
+  max-width: 2.2em;
+  margin-left: .3em;
 }
 
-html[data-theme="dark"] :is(.signup-form, .signin-form, .forget-password__dialog) input:not([type="submit"]) {
-  background: #3b3b3b;
-  border: 1px solid rgb(133, 133, 133);
-}
-
-:is(.signup-form, .signin-form, .forget-password__dialog--form) > div {
-  position: relative;
-}
-:is(.signup-form, .signin-form) div:first-child {
-  margin-bottom: 1em;
-}
-:is(.signup-form, .signin-form, .forget-password__dialog) label {
-  position: absolute;
-  top: 50%;
-  left: 1em;
-  color: grey;
-  transform: translateY(-50%);
-  transition: 0.2s;
-  user-select: none;
-}
-
-:is(.signup-form, .signin-form, .forget-password__dialog) label.active {
-  transform: translateY(-201%);
-  color: initial;
-  left: 0;
-}
-
-.signup-form,
-.signin-form {
+.register__main {
   display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-.error-box {
-  position: absolute;
-  top: 101%;
-  color: red;
-  left: 0;
-}
-
-/* mode switcher */
-.mode-switcher-container {
-  background-color: var(--secondary-bg);
-  padding: 0.4em;
-  border-radius: 1em;
-  position: relative;
-}
-.mode-switcher-container::after {
-  content: "";
-  position: absolute;
-  width: 52%;
-  height: calc(100% - 5px);
-  top: 50%;
-  transform: translateY(-50%);
-  left: 2%;
-  background: var(--primary-bg);
-  z-index: 1;
-  border-radius: inherit;
-  transition: 0.2s transform;
-}
-
-.mode-switcher-container[data-current-mode="signin"]::after {
-  transform: translate(117%, -50%);
-  width: 44%;
-}
-.mode-switcher-container > button {
-  position: relative;
-  z-index: 2;
-}
-/* forgot password dialog box */
-.forget-password__dialog {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: rgba(68, 68, 68, 0.753);
-  z-index: 2000;
-}
-.forget-password__dialog--form {
-  width:  min(25em, 90%);
-  background: var(--primary-bg);
-  padding: 2em;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   gap: var(--default-gap);
-  border-radius: .5em
-}
-.forget-password__dialog--form > h2 {
-  margin-bottom: 1em;  
-}
-.forget-password__dialog--form > input[type="submit"] {
-  padding: .7em .8em;
-}
-.forget-password__backBtn {
-  align-self: flex-start;
-  border: .15em solid var(--primary-clr);
-  background: transparent;
-  padding: .2em;
-  border-radius: .15em;
-  cursor: pointer;
-}
-.forget-password__backBtn:hover {
-  opacity: .7;  
+  align-items: center;
+  justify-content: center;
 }
 
-
-/* media queries */
-
-@media (min-width: 30em) {
-  :is(.register, .sign-in) h1 {
-    text-align: center;
-  }
-}
-@media (max-width: 30em) {
-  .back-div {
-    gap: var(--default-gap);
-    flex-wrap: wrap;
-  }
-  .back-div > a {
-    order: 1;
-    flex: 1 1 100%;
-    text-align: center;
-  }
-  .back-div > .mode-switcher-container {
-    order: 2;
-  }
-  .back-div > .theme-switcher-container {
-    order: 3;
-  }
-}

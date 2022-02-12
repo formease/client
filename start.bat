@@ -1,3 +1,5 @@
+:: ⚠️ Work In Progress ::
+
 @ECHO off
 ECHO Deploy for production
 TYPE deploy.txt > .gitignore
