@@ -8,10 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+      href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+      id="popup-dark-theme"
+    />
 
     <link rel="stylesheet" href="../public/styles/dashboard.css" />
-    <script src="../public/dist/auth.js"></script>
-    <script src="../public/dist/dashboard.js" type="module"></script>
+    <!-- <script src="../public/dist/auth.js"></script> -->
+    <!-- <script src="../public/dist/dashboard.js" type="module"></script> -->
+    <script src="../public/js/dashboard.js" type="module"></script>
 
     <title>FormEase | Dashboard</title>
   </head>
@@ -24,7 +31,22 @@
       <div class="theme-switcher-container" id="theme-toggler" title="Toggle Theme">
         <span class="material-icons-outlined material-icons"> light_mode </span>
       </div>
-      <div class="profile-wrapper"><img src="../public/assets/avatar.png" alt="profile_photo" id="user_profile_photo"/></div>
+      <div class="profile-wrapper">
+       <div>
+        <img
+        src="../public/assets/avatar.png"
+        alt="profile_photo"
+        id="user_profile_photo"
+      />
+        <span class="material-icons-outlined material-icons"> arrow_drop_down
+        </span>      
+       </div>
+             
+        <div class="profile__tooltip">
+          <button data-logout-btn>Logout</button>
+          <small>Let's create something</small>
+        </div>
+      </div>
     </header>
     <aside>
       <ul id="list">
