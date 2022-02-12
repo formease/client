@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, GithubAuthProvider } from 'firebase/auth'
 
 export const FirebaseInit = () => {
   return new Promise((resolve, reject) => {
@@ -24,6 +24,12 @@ export const loginGoogle = () => {
     signInWithRedirect(auth, provider)
     resolve()
   })
+}
+
+export const loginGithub = () => {
+  const provider = new GithubAuthProvider()
+  const auth = getAuth()
+  signInWithRedirect(auth, provider)
 }
 
 export const stateManager = () => {

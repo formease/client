@@ -1,4 +1,4 @@
-import { loginGoogle, FirebaseInit, stateManager } from './auth'
+import { loginGoogle, loginGithub, FirebaseInit, stateManager } from './auth'
 
 const localTheme = localStorage.getItem('theme')
 const preferedTheme = window.matchMedia('(prefers-color-scheme: dark)')
@@ -25,6 +25,9 @@ const runner = async () => {
   stateManager()
   document.getElementById('google_auth').addEventListener('click', () => {
     loginGoogle()
+  })
+  document.getElementById('github_auth').addEventListener('click', () => {
+    loginGithub()
   })
 }
 runner()
