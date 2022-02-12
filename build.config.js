@@ -11,6 +11,7 @@ const builder = async () => {
       esbuild.build({
         entryPoints: [`./src/public/js/${file}`],
         outfile: `./src/public/dist/${file}`,
+        legalComments: 'none',
         minify: true,
         bundle: true,
         platform: 'browser',

@@ -119,3 +119,4 @@ package-lock.json
 credentials.json
 token.json
 .dccache
+.dccache.json

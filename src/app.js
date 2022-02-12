@@ -4,6 +4,7 @@ const compression = require('compression')
 const path = require('path')
 const rateLimit = require('express-rate-limit')
 const Logger = require('./lib/logger')
+// deepcode ignore UseCsurfForExpress: <No usage of cookies currently>
 const app = express()
 const logger = new Logger('FormEase', true, true)
 
