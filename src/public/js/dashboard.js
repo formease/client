@@ -1,5 +1,3 @@
-import { getAuth } from 'firebase/auth'
-import { FirebaseInit, stateManager } from './auth'
 
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
@@ -90,11 +88,6 @@ function createPopup (titleHTML, contentHTML, permanent = false, extraHTML = '')
   document.body.append(popupElem)
 }
 
-(async () => {
-  await FirebaseInit()
-  await stateManager()
-})()
-const auth = getAuth()
 /* if (!auth.currentUser.emailVerified) {
   createPopup(
     'Oops!',
@@ -103,6 +96,3 @@ const auth = getAuth()
     '<small>Already verfied? Try reloading the page</small>'
   )
 } */
-
-const userId = auth.currentUser.uid
-document.getElementById('user_profile_photo').src = `https://avatars.dicebear.com/api/identicon/${userId}.svg`
