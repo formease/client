@@ -1,5 +1,5 @@
-// import { getAuth } from 'firebase/auth'
-// import { FirebaseInit, stateManager } from './auth'
+import { getAuth } from 'firebase/auth'
+import { FirebaseInit, stateManager } from './auth'
 
 // Theme functionality
 const THEME_BTN = document.getElementById("theme-toggler");
@@ -72,28 +72,28 @@ document.querySelector("[data-sidebar-toggler]").addEventListener("click", () =>
 // -----------------------
 const createProjectBtn = document.querySelector("[data-create-project-btn]");
 
-// (async () => {
-//   await FirebaseInit()
-//   await stateManager()
-// })()
-// const auth = getAuth()
-// if (!auth.currentUser.emailVerified) {
-//   const popupObj = {
-//     icon: "warning",
-//     title: "Oops...",
-//     html: 'You need take one more step! <strong>Check up your emails and verify email!</strong>',
-//     footer: "<small>Already verfied? Try reloading the page</small>",
-//     allowEscapeKey: false,
-//   };
-//   Swal.fire(popupObj);
-//   createProjectBtn.addEventListener('click', (e) => {
-//     Swal.fire(popupObj);
-//     e.preventDefault(); // to prevent other listeners 
-//   })
-// }
+(async () => {
+  await FirebaseInit()
+  await stateManager()
+})()
+const auth = getAuth()
+if (!auth.currentUser.emailVerified) {
+  const popupObj = {
+    icon: "warning",
+    title: "Oops...",
+    html: 'You need take one more step! <strong>Check up your emails and verify email!</strong>',
+    footer: "<small>Already verfied? Try reloading the page</small>",
+    allowEscapeKey: false,
+  };
+  Swal.fire(popupObj);
+  createProjectBtn.addEventListener('click', (e) => {
+    Swal.fire(popupObj);
+    e.preventDefault(); // to prevent other listeners 
+  })
+}
 
-// const userId = auth.currentUser.uid
-// document.getElementById('user_profile_photo').src = `https://avatars.dicebear.com/api/identicon/${userId}.svg`
+const userId = auth.currentUser.uid
+document.getElementById('user_profile_photo').src = `https://avatars.dicebear.com/api/identicon/${userId}.svg`
 
 
 const createProjectPopupObj = {

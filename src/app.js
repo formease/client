@@ -1,23 +1,38 @@
 const express = require('express')
 const helmet = require('helmet')
 const compression = require('compression')
+const cors = require('cors')
 const path = require('path')
 const rateLimit = require('express-rate-limit')
 const Logger = require('./lib/logger')
+// deepcode ignore UseCsurfForExpress: <No usage of cookies currently>
 const app = express()
 const logger = new Logger('FormEase', true, true)
 
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
-      'connect-src': ['https://*.googleapis.com']
+      'connect-src': ['https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
+      'script-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
+      'frame-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/']
     }
   }
 }))
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions))
+app.use((req, res, next) => {
+  res.header('Cross-Origin-Embedder-Policy', 'credentialles')
+  res.header('Cross-Origin-Resource-Policy', 'cross-origin')
+  next()
+})
 app.use(compression())
 app.use('/public', express.static(path.resolve(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
 const rateLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
   max: 50,
@@ -26,7 +41,6 @@ const rateLimiter = rateLimit({
 })
 app.use(rateLimiter)
 app.use('/', [require('./routes/landing'), require('./routes/auth'), require('./routes/dashboard')])
-
 app.set('trust proxy', 1)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'pages'))
