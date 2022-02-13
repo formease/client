@@ -13,7 +13,7 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       'connect-src': ['https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
-      'script-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/', 'https://cdn.jsdelivr.net/npm/sweetalert2@11'],
+      'script-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
       'frame-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
       'img-src': ["'self'", 'https://avatars.githubusercontent.com/', 'https://lh3.googleusercontent.com/']
     }
@@ -41,7 +41,7 @@ const rateLimiter = rateLimit({
   legacyHeaders: false
 })
 app.use(rateLimiter)
-app.use('/', [require('./routes/landing'), require('./routes/auth'), require('./routes/dashboard')])
+app.use('/', [require('./routes/landing'), require('./routes/auth'), require('./routes/dashboard'), require('./routes/discord')])
 app.set('trust proxy', 1)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'pages'))
