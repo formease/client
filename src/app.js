@@ -41,7 +41,7 @@ const rateLimiter = rateLimit({
   legacyHeaders: false
 })
 app.use(rateLimiter)
-app.use('/', [require('./routes/landing'), require('./routes/auth'), require('./routes/dashboard')])
+app.use('/', [require('./routes/landing'), require('./routes/auth'), require('./routes/dashboard'), require('./routes/discord')])
 app.set('trust proxy', 1)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'pages'))
