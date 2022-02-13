@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
@@ -21,7 +21,8 @@ if (localTheme) {
   document.documentElement.dataset.theme = localTheme
   THEME_BTN.innerHTML = themesBtnHTML[localTheme]
 
-  if (localTheme === 'light') darkPopupStyleSheet.remove()
+  if (localTheme === 'light') darkPopupStyleSheet.remove();
+  if (localTheme === 'dark')  document.head.append(darkPopupStyleSheet)
 } else if (preferedTheme.matches) {
   document.documentElement.dataset.theme = 'dark'
 
@@ -31,7 +32,7 @@ if (localTheme) {
   localStorage.setItem('theme', 'dark')
 } else {
   localStorage.setItem('theme', 'light')
-  if (localTheme === 'light') darkPopupStyleSheet.remove()
+  darkPopupStyleSheet.remove()
 }
 
 THEME_BTN.addEventListener('click', () => {
