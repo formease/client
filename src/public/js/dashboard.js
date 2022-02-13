@@ -1,4 +1,4 @@
-// import Swal from 'sweetalert2'
+import Swal from 'sweetalert2'
 
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
@@ -21,8 +21,8 @@ if (localTheme) {
   document.documentElement.dataset.theme = localTheme
   THEME_BTN.innerHTML = themesBtnHTML[localTheme]
 
-  if (localTheme === 'light') darkPopupStyleSheet.remove();
-  if (localTheme === 'dark')  document.head.append(darkPopupStyleSheet)
+  if (localTheme === 'light') darkPopupStyleSheet.remove()
+  if (localTheme === 'dark') document.head.append(darkPopupStyleSheet)
 } else if (preferedTheme.matches) {
   document.documentElement.dataset.theme = 'dark'
 
