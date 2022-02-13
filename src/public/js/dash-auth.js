@@ -1,5 +1,6 @@
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import { FirebaseInit } from './auth'
+import Swal from 'sweetalert2'
 
 (async () => {
   await FirebaseInit()
@@ -13,12 +14,27 @@ import { FirebaseInit } from './auth'
       document.location.href = '/auth'
     }
   })
-  document.getElementById('sign_out-auth').addEventListener('click', () => {
-    signOut(auth).then(() => {
-      document.location.href = '/'
-    }).catch((error) => {
-      alert(error)
-      console.error(error)
+  const logoutBtn = document.querySelector('[data-logout-btn]')
+
+  logoutBtn.addEventListener('click', () => {
+    Swal.fire({
+      title: 'Really wanna logout?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Logout',
+      footer: 'Looks like you did enough work..',
+      allowEscapeKey: false,
+      allowEnterKey: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const auth = getAuth()
+        signOut(auth).then(() => {
+          document.location.href = '/'
+        }).catch((error) => {
+          alert(error)
+          console.error(error)
+        })
+      }
     })
   })
 })()
