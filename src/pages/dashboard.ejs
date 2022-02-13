@@ -5,10 +5,15 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
+      rel="stylesheet"
+    />
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <link
       href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
       rel="stylesheet"
@@ -16,34 +21,40 @@
     />
 
     <link rel="stylesheet" href="../public/styles/dashboard.css" />
-    <!-- <script src="../public/dist/auth.js"></script> -->
-    <!-- <script src="../public/dist/dashboard.js" type="module"></script> -->
-    <script src="../public/js/dashboard.js" type="module"></script>
+    <script src="../public/dist/dashboard.js" type="module"></script>
+    <script src="../public/dist/dash-auth.js" type="module"></script>
 
     <title>FormEase | Dashboard</title>
   </head>
   <body id="dashboard-page">
     <header>
       <button data-sidebar-toggler title="Show/hide sidebar">
-        <span class="material-icons-outlined material-icons"> chevron_right </span>
+        <span class="material-icons-outlined material-icons">
+          chevron_right
+        </span>
       </button>
       <nav><a href="/">Home</a><a href="#">Pricing</a></nav>
-      <div class="theme-switcher-container" id="theme-toggler" title="Toggle Theme">
+      <div
+        class="theme-switcher-container"
+        id="theme-toggler"
+        title="Toggle Theme"
+      >
         <span class="material-icons-outlined material-icons"> light_mode </span>
       </div>
       <div class="profile-wrapper">
-       <div>
-        <img
-        src="../public/assets/avatar.png"
-        alt="profile_photo"
-        id="user_profile_photo"
-      />
-        <span class="material-icons-outlined material-icons"> arrow_drop_down
-        </span>      
-       </div>
-             
+        <div>
+          <img 
+            src="../public/assets/avatar.png"
+            alt="profile_photo"
+            id="user_profile_photo"
+          />
+          <span class="material-icons-outlined material-icons">
+            arrow_drop_down
+          </span>
+        </div>
+
         <div class="profile__tooltip">
-          <button data-logout-btn>Logout</button>
+          <button data-logout-btn id="sign_out-auth">Logout</button>
           <small>Let's create something</small>
         </div>
       </div>

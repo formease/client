@@ -13,8 +13,9 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       'connect-src': ['https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
-      'script-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
-      'frame-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/']
+      'script-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/', 'https://cdn.jsdelivr.net/npm/sweetalert2@11'],
+      'frame-src': ["'self'", 'https://*.googleapis.com', 'https://*.google.com', 'https://forms-server.firebaseapp.com/'],
+      'img-src': ["'self'", 'https://avatars.githubusercontent.com/', 'https://lh3.googleusercontent.com/']
     }
   }
 }))
