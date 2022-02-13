@@ -1,7 +1,6 @@
-'use strict'
+import { FirebaseInit } from './auth'
+import { getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, GithubAuthProvider } from 'firebase/auth'
 
-const THEME_BTN = document.getElementById('theme-toggler')
-let currentTheme = document.documentElement.dataset.theme
 const localTheme = localStorage.getItem('theme')
 const preferedTheme = window.matchMedia('(prefers-color-scheme: dark)')
 
@@ -22,3 +21,26 @@ document.querySelector('#dark-button').addEventListener('click', () => {
   document.documentElement.dataset.theme = 'dark'
   localStorage.setItem('theme', 'dark')
 })
+const runner = async () => {
+  await FirebaseInit()
+  const auth = getAuth()
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log('User is signed in')
+      document.location.href = '/dashboard'
+    } else {
+      console.info('no user')
+    }
+  })
+  document.getElementById('google_auth').addEventListener('click', () => {
+    const auth = getAuth()
+    const provider = new GoogleAuthProvider()
+    signInWithRedirect(auth, provider)
+  })
+  document.getElementById('github_auth').addEventListener('click', () => {
+    const provider = new GithubAuthProvider()
+    const auth = getAuth()
+    signInWithRedirect(auth, provider)
+  })
+}
+runner()

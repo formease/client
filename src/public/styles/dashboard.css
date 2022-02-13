@@ -9,14 +9,12 @@
   --content-bg: hsl(0, 0%, 95%);
   --bdr-clr: royalblue;
   --scrollbar-thumb-bg: hsl(225, 73%, 87%);
-  --popup-bg: rgb(255, 29, 29);
 }
 :root[data-theme="dark"] {
   --primary-bg: 0, 0%, 22%;
   --content-bg: hsl(0, 0%, 14%);
   --bdr-clr: rgb(83, 83, 83);
   --scrollbar-thumb-bg: hsl(0, 0%, 70%);
-  --popup-bg: rgb(255, 62, 62);
   color-scheme: dark;
   color: white;
 }
@@ -32,10 +30,10 @@ body {
   grid-template-rows: max-content 1fr max-content;
   font-family: "Rubik", sans-serif;
 }
-::-webkit-scrollbar {
+aside::-webkit-scrollbar {
   width: 0.5em;
 }
-::-webkit-scrollbar-thumb {
+aside::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb-bg);
   border-radius: 2em;
 }
@@ -58,7 +56,7 @@ header {
   background: hsla(var(--primary-bg), 0.8);
   color: white;
   grid-area: 1 / 1 / 2 / span 2;
-  border-radius: 0 0 0.25em 0.25em;
+  border-radius: 0 0 0.25em 0;
 }
 aside {
   position: absolute;
@@ -88,11 +86,70 @@ nav > a:hover {
 }
 .profile-wrapper {
   max-width: 3em;
+  position: relative;
 }
-.profile-wrapper > img {
+.profile-wrapper > div:first-child {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.profile-wrapper > div:first-child span {
+  user-select: none;
+}
+.profile-wrapper > div:first-child:hover{
+  opacity: .85;
+}
+.profile-wrapper  img {
   border-radius: 100%;
   border: 0.15em solid var(--bdr-clr);
   object-fit: cover;
+}
+.profile__tooltip {
+  visibility: hidden;
+  position: absolute;
+  top: calc(100% + .3em);
+  right: 0;
+  background: hsl(var(--primary-bg));
+  border: .15em solid var(--bdr-clr);
+  padding: 1em 1.2em;
+  border-radius: .5em;
+  display: flex;
+  flex-direction: column;
+  gap: .8em;
+  box-shadow: 0px 0px 2px rgb(36 36 36);
+  white-space: nowrap;
+  z-index: 100;
+}
+.profile__tooltip > * + *  {
+  border-top: .15em solid var(--bdr-clr);
+  padding-top: .5em;
+}
+.profile__tooltip--active {
+  visibility: visible;
+}
+.profile__tooltip::after {
+  position: absolute;
+  content: '';
+  left: 88%;
+  transform: translateX(-50%);
+  bottom: 100%;
+  border-width: .7em;
+  border-style: solid;
+  border-color: transparent transparent var(--bdr-clr)  transparent;
+}
+.profile__tooltip > button {
+  border: .15em solid;
+  padding: .4em .5em;
+  border-radius: .5em;
+  cursor: pointer;
+  background: hsla(var(--primary-bg), .9);
+  color: white;
+}
+.profile__tooltip > button:hover {
+  opacity: .7
+}
+.profile__tooltip small {
+  pointer-events: none;
 }
 
 main {
@@ -117,7 +174,7 @@ main > button[data-create-project-btn] {
   flex: 1;
 }
 aside {
-  background: hsla(var(--primary-bg), 0.9);
+  background: hsla(var(--primary-bg), 0.98);
   border-bottom: 0.2em solid var(--bdr-clr);
   border-top: 0.2em solid var(--bdr-clr);
   border-right: 0.2em solid var(--bdr-clr);
@@ -142,7 +199,7 @@ footer {
   color: white;
   font-size: 1.2rem;
   grid-area: 3 / 1 / 4 / span 2;
-  border-radius: 0.25em 0.25em 0 0;
+  border-radius: 0 0.25em 0 0;
 }
 [data-create-project-btn] {
   background: hsl(var(--primary-bg));
@@ -198,56 +255,9 @@ main > [data-create-project-btn]:focus::after {
 .theme-switcher-container:hover {
   opacity: 0.8;
 }
-
-/* user-popup */
-.user__popup {
-  display: block;
-  position: absolute;
-  inset: 1.5em 0 auto 0;
-  margin-inline: auto;
-  background: var(--popup-bg);
-  padding: 1.5em 1.3em;
-  padding-right: 10%;
-  width: min(25em, 80%);
-  border-radius: 0.5em;
-  box-shadow: 0 0 0.2em 0.1em rgba(0, 0, 0, 0.438);
-  color: white;
-  overflow: hidden;
-  z-index: 9999;
-  line-height: 1.5;
-  transition: 0.25s;
-}
-.user__popup.removing {
-  transform: translateX(-20%);
-  opacity: 0;
-}
-.user__popup > div:first-child {
-  width: initial;
-  overflow-wrap: break-word;
-}
-.user__popup small {
-  display: inline-block;
-  margin-top: 0.5em;
-}
-.user__popup_removeBtn {
-  position: absolute;
-  inset: 0 0 0 auto;
-  padding: 0.5em;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  font-size: 2rem;
-  cursor: pointer;
-}
-.user__popup_removeBtn:hover {
-  background: rgba(255, 66, 66, 0.678);
-}
-:root[data-theme="dark"] .user__popup_removeBtn:hover {
-  background: rgba(255, 35, 35, 0.678);
-}
-.user__popup_h3 {
-  font-weight: 800;
-  margin-bottom: 0.5em;
+/* lib-popup styles */
+.popup-label {
+  margin-right: 1em;
 }
 
 @media (min-width: 40em) {
@@ -261,15 +271,9 @@ main > [data-create-project-btn]:focus::after {
   [data-sidebar-toggler] {
     display: none;
   }
-  .user__popup {
-    inset: 1.5em 2em auto auto;
-    min-width: 20em;
-    max-width: 33vw;
-    width: initial;
-  }
 }
 @media (min-width: 80em) {
   :root {
-    --default-gap: 1.3em;
+    --default-gap: 1.2em;
   }
 }

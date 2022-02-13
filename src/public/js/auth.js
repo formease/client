@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+
 export const FirebaseInit = () => {
   return new Promise((resolve, reject) => {
     const config = {
