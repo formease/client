@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
 let currentTheme = document.documentElement.dataset.theme
@@ -129,19 +130,4 @@ createProjectBtn.addEventListener('click', async function (e) {
         `${data['Discord Webhook Support'] ? '<b>Discord Webhook support</b>: Yes<br>' : ''}`
     })
   }
-})
-
-// logout btn
-const logoutBtn = document.querySelector('[data-logout-btn]')
-
-logoutBtn.addEventListener('click', () => {
-  Swal.fire({
-    title: 'Really wanna logout?',
-    icon: 'question',
-    showCancelButton: true,
-    confirmButtonText: 'Logout',
-    footer: 'Looks like you did enough work..',
-    allowEscapeKey: false,
-    allowEnterKey: false
-  })
 })
