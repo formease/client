@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "test": "nodemon src/app.js",
-    "start":  "pm2-runtime src/app.js --env production",
+    "start":  "pm2-runtime start ecosystem.config.js --env production",
     "bat": "start.bat",
     "build": "node build.config.js",
     "lint": "eslint src/**/*.js",
