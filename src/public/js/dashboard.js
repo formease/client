@@ -47,7 +47,10 @@ window.addEventListener('storage', (e) =>{
   if (keyChanged !== 'theme') return;
   localStorage.setItem(keyChanged, storageArea.theme)
   themeChecker()
+<<<<<<< HEAD
 
+=======
+>>>>>>> storage-event
 })
 
 THEME_BTN.addEventListener("click", () => {
