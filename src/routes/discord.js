@@ -10,9 +10,13 @@ router.post('/f/:userid/:formid', methods(['POST']), (req, res) => {
     res.status(400).send('Bad request')
   }
   res.render('submit')
-  discordMessage(req.body).then(() => {
-    console.log('Message sent')
-  })
+  try {
+    discordMessage(req.body).then(() => {
+      console.log('Message sent')
+    })
+  } catch {
+    console.log('Message not sent')
+  }
 }
 )
 
