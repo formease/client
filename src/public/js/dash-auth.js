@@ -17,24 +17,28 @@ import Swal from 'sweetalert2'
   const logoutBtn = document.querySelector('[data-logout-btn]')
 
   logoutBtn.addEventListener('click', () => {
-    Swal.fire({
-      title: 'Really wanna logout?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Logout',
-      footer: 'Looks like you did enough work..',
-      allowEscapeKey: false,
-      allowEnterKey: false
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const auth = getAuth()
-        signOut(auth).then(() => {
-          document.location.href = '/'
-        }).catch((error) => {
-          alert(error)
-          console.error(error)
-        })
-      }
-    })
+    try {
+      Swal.fire({
+        title: 'Really wanna logout?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Logout',
+        footer: 'Looks like you did enough work..',
+        allowEscapeKey: false,
+        allowEnterKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const auth = getAuth()
+          signOut(auth).then(() => {
+            document.location.href = '/'
+          }).catch((error) => {
+            alert(error)
+            console.error(error)
+          })
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
   })
 })()
