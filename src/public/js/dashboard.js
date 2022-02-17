@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
 let currentTheme = document.documentElement.dataset.theme
-const localTheme = localStorage.getItem('theme')
+let localTheme = localStorage.getItem('theme')
 const preferedTheme = window.matchMedia('(prefers-color-scheme: dark)')
 
 const darkPopupStyleSheet = document.getElementById('popup-dark-theme')
@@ -17,29 +17,42 @@ const themesBtnHTML = {
     </span>`
 }
 
-if (localTheme) {
-  document.documentElement.dataset.theme = localTheme
-  THEME_BTN.innerHTML = themesBtnHTML[localTheme]
+const themeChecker = () => {
+  if (localTheme) {
+    localTheme = localStorage.getItem('theme')
 
-  if (localTheme === 'light') darkPopupStyleSheet.remove()
-  if (localTheme === 'dark') document.head.append(darkPopupStyleSheet)
-} else if (preferedTheme.matches) {
-  document.documentElement.dataset.theme = 'dark'
+    document.documentElement.dataset.theme = localTheme
+    THEME_BTN.innerHTML = themesBtnHTML[localTheme]
 
-  THEME_BTN.innerHTML = themesBtnHTML.dark
-  document.head.append(darkPopupStyleSheet)
+    if (localTheme === 'light') darkPopupStyleSheet.remove()
+    else if (localTheme === 'dark') document.head.append(darkPopupStyleSheet)
+  } else if (preferedTheme.matches) {
+    document.documentElement.dataset.theme = 'dark'
 
-  localStorage.setItem('theme', 'dark')
-} else {
-  localStorage.setItem('theme', 'light')
-  darkPopupStyleSheet.remove()
+    THEME_BTN.innerHTML = themesBtnHTML.dark
+    document.head.append(darkPopupStyleSheet)
+
+    localStorage.setItem('theme', 'dark')
+  } else {
+    localStorage.setItem('theme', 'light')
+    darkPopupStyleSheet.remove()
+  }
 }
+themeChecker()
+
+window.addEventListener('storage', (e) => {
+  const storageArea = e.storageArea
+  const keyChanged = e.key
+
+  if (keyChanged !== 'theme') return
+  localStorage.setItem(keyChanged, storageArea.theme)
+  themeChecker()
+})
 
 THEME_BTN.addEventListener('click', () => {
   currentTheme = document.documentElement.dataset.theme
   if (currentTheme === 'dark') {
     document.documentElement.dataset.theme = 'light'
-
     THEME_BTN.innerHTML = themesBtnHTML.light
     darkPopupStyleSheet.remove()
 
@@ -59,18 +72,20 @@ profileWrapper.addEventListener('click', function () {
 })
 
 // sidebar toggler
+const asideElem = document.querySelector('aside')
 document.querySelector('[data-sidebar-toggler]').addEventListener('click', () => {
-  const asideElem = document.querySelector('aside')
   asideElem.classList.toggle('active')
 
   document.addEventListener('click', (e) => {
-    if (e.target.closest('aside') || e.target.closest('[data-sidebar-toggler]')) return
-
+    const target = e.target
+    if (target.closest('aside') || target.closest('[data-sidebar-toggler]')) return
     if (asideElem.classList.contains('active')) asideElem.classList.remove('active')
   })
 })
 // -----------------------
 const createProjectBtn = document.querySelector('[data-create-project-btn]')
+const projectList = document.getElementById('project-list')
+const mainWrapper = document.querySelector('.main__wrapper')
 
 const createProjectPopupObj = {
   title: 'Create Project',
@@ -97,11 +112,13 @@ const createProjectPopupObj = {
 
 createProjectBtn.addEventListener('click', async function (e) {
   if (e.defaultPrevented) return
+
   const { value: data } = await Swal.fire(createProjectPopupObj)
   if (!data) return
-  if (data.projectName.length < 5) {
+
+  if (data.projectName.length < 4 || data.projectName.length > 40) {
     const { value: projectName } = await Swal.fire({
-      title: 'Project name should have at least 5 characters',
+      title: 'Project name should have at least 4 characters and at maximum 40',
       input: 'text',
       icon: 'error',
       inputLabel: 'Enter Project name',
@@ -112,23 +129,61 @@ createProjectBtn.addEventListener('click', async function (e) {
         autocomplete: 'off'
       },
       inputValidator: (value) => {
-        if (value.length < 5) {
-          return 'Name should have at least 5 characters!'
+        if (value.length < 4) {
+          return 'Name should have at least 4 characters and at maximum 30!'
+        } else if (value.length > 40) {
+          return 'Name should have at maximum 40 characters!'
         }
       }
     })
     data.projectName = projectName
   }
   if (!data.projectName) return
-  if (data && data.projectName.length >= 5) {
+  if (data && data.projectName.length >= 4 && data.projectName.length <= 40) {
     Swal.fire({
+      toast: true,
       icon: 'success',
-      title: 'Project Created!',
-      html:
-        `<b>Name:</b> ${data.projectName}<br>` +
-        `<b>Description:</b> ${data.projectDescription}<br>` +
-        `${data['Google Support'] ? '<b>Google Drive support</b>: Yes<br>' : ''}` +
-        `${data['Discord Webhook Support'] ? '<b>Discord Webhook support</b>: Yes<br>' : ''}`
+      title: 'Project created successfully!',
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 4000,
+      timerProgressBar: true
     })
+
+    const projectElemHTML = `<li data-project="${data.projectName}">${data.projectName}<small>${data.projectDescription}</small></li>`
+    projectList.insertAdjacentHTML('beforeend', projectElemHTML)
+
+    const projectDashboardHTML = `<div class="project-dashboard hidden" data-project-for="${data.projectName}"><div class="project__functions"><button class="project__editBtn" title="edit project details"> <span class="material-icons-outlined material-icons">edit</span></button><button class="project__deleteBtn" title="Delete project"><span class="material-icons-outlined material-icons">delete</span></button></div><div class="project__details"><h2>${data.projectName}</h2><p class="description">${data.projectDescription}</p></div>/div>`
+    mainWrapper.insertAdjacentHTML('beforeend', projectDashboardHTML)
+
+    removeOtherDashboard(data.projectName)
   }
 })
+
+// dashboard project change
+projectList.addEventListener('click', function (e) {
+  const target = e.target.closest('li')
+  if (!target) return
+
+  const projectName = target.dataset.project
+  removeOtherDashboard(projectName)
+})
+
+function removeOtherDashboard (currentDashboard) {
+  const otherProjectDashboard = document.querySelectorAll(
+    `.main__wrapper > .project-dashboard:not([data-project-for="${currentDashboard}"])`
+  )
+
+  otherProjectDashboard.forEach((projectDash) => {
+    projectDash.classList.add('removing')
+    setTimeout(() => {
+      projectDash.classList.add('hidden')
+      projectDash.classList.remove('removing')
+    }, 300)
+  })
+  setTimeout(() => {
+    document.querySelector(`[data-project-for="${currentDashboard}"]`).classList?.remove('hidden')
+  }, 310)
+
+  if (asideElem.classList.contains('active')) asideElem.classList.remove('active')
+}

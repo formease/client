@@ -1,17 +1,29 @@
 import { FirebaseInit } from './auth'
 import { getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, GithubAuthProvider } from 'firebase/auth'
 
-const localTheme = localStorage.getItem('theme')
+let localTheme = localStorage.getItem('theme')
 const preferedTheme = window.matchMedia('(prefers-color-scheme: dark)')
 
-if (localTheme) {
-  document.documentElement.dataset.theme = localTheme
-} else if (preferedTheme.matches) {
-  document.documentElement.dataset.theme = 'dark'
-  localStorage.setItem('theme', 'dark')
-} else {
-  localStorage.setItem('theme', 'light')
+const themeChecker = () => {
+  if (localTheme) {
+    localTheme = localStorage.getItem('theme') 
+    document.documentElement.dataset.theme = localTheme
+  } else if (preferedTheme.matches) {
+    document.documentElement.dataset.theme = 'dark'
+    localStorage.setItem('theme', 'dark')
+  } else {
+    localStorage.setItem('theme', 'light')
+  }
 }
+themeChecker()
+window.addEventListener('storage', (e) =>{
+  let storageArea = e.storageArea;
+  let keyChanged = e.key;
+
+  if (keyChanged !== 'theme') return;
+  localStorage.setItem(keyChanged, storageArea.theme)
+  themeChecker()
+})
 
 document.querySelector('#light-button').addEventListener('click', () => {
   document.documentElement.dataset.theme = 'light'
