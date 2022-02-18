@@ -373,6 +373,17 @@ footer {
     display: none;
   }
 }
+@media (max-width: 30em) {
+  .entered-project-name, .entered-project-description {
+    margin: 0;
+    margin-block: .5em;
+    width: 100%;
+  }
+  .entered-project-description ~ label {
+    margin-bottom: .4em;
+    display: inline-block;
+  }
+}
 @media (min-width: 80em) {
   :root {
     --default-gap: 1.2em;
