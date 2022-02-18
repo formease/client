@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
@@ -83,9 +83,10 @@ document.querySelector('[data-sidebar-toggler]').addEventListener('click', () =>
   })
 })
 // -----------------------
-const createProjectBtn = document.querySelector('[data-create-project-btn]')
-const projectList = document.getElementById('project-list')
-const mainWrapper = document.querySelector('.main__wrapper')
+const createProjectBtn = document.querySelector('[data-create-project-btn]');
+const projectList = document.getElementById('project-list');
+const mainWrapper = document.querySelector('.main__wrapper');
+const projects = [];
 
 const createProjectPopupObj = {
   title: 'Create Project',
@@ -136,9 +137,35 @@ createProjectBtn.addEventListener('click', async function (e) {
         }
       }
     })
-    data.projectName = projectName
+    data.projectName = projectName;
   }
-  if (!data.projectName) return
+  if (!data.projectName) return;
+
+  if (projects.find((project) => project.projectName == data.projectName)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Already a project with same name',
+      text: 'Please choose a different name for your project',
+      inputAttributes: {
+        autocomplete: 'off'
+      },
+    })
+    return;
+  }
+
+  if (data['Discord Webhook Support']) {
+    const {value: webhook} = await Swal.fire({
+      icon: 'info',
+      title: 'One more step! Enter your discord webhook here!',
+      footer: "Don't really know how? Follow the steps-<a href='https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks'> here</a>",
+      input: 'url',
+      inputLabel: 'Discord Webhook url',
+      inputPlaceholder: 'Enter the URL',
+      showCancelButton: true
+    })
+    if (!webhook) return;
+    data.discordWebhook = webhook;
+  }
   if (data && data.projectName.length >= 4 && data.projectName.length <= 40) {
     Swal.fire({
       toast: true,
@@ -149,26 +176,28 @@ createProjectBtn.addEventListener('click', async function (e) {
       timer: 4000,
       timerProgressBar: true
     })
+    projects.push(data)
 
     const projectElemHTML = `<li data-project="${data.projectName}">${data.projectName}<small>${data.projectDescription}</small></li>`
     projectList.insertAdjacentHTML('beforeend', projectElemHTML)
 
-    const projectDashboardHTML = `<div class="project-dashboard hidden" data-project-for="${data.projectName}">
-    <div class="project__functions">
-      <button class="project__editBtn" title="edit project details">
-        <span class="material-icons-outlined material-icons">edit</span></button
-      ><button class="project__deleteBtn" title="Delete project">
-        <span class="material-icons-outlined material-icons">delete</span>
-      </button>
-    </div>
-    <div class="project__details">
-      <h2>${data.projectName}</h2>
-      <p class="description">${data.projectDescription}</p>
-    </div>
-  </div>`
+    const projectDashboardHTML = `<div class="project-dashboard hidden" data-project-for="${data.projectName}"><div class="project__details"><h2>${data.projectName}</h2><p class="description">${data.projectDescription}</p></div><div class="project__functions"><button class="project__editBtn" title="edit project details"> <span class="material-icons-outlined material-icons">edit</span></button><button class="project__deleteBtn" title="Delete project"><span class="material-icons-outlined material-icons">delete</span></button></div><div class="project__main">${data['Google Support'] ? `<label for="google-link">Spreadsheet link</label><input type="text" class="google-link" id="google-link" value="${'And example of link'}"disabled><button class="copy-btn" data-copy-btn>Copy link</button>`: ""}</div></div>`
     mainWrapper.insertAdjacentHTML('beforeend', projectDashboardHTML)
 
     removeOtherDashboard(data.projectName)
+
+    // extra stuff
+    const copyBtn = mainWrapper.lastElementChild.querySelector('[data-copy-btn]')
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(copyBtn.previousElementSibling.value);
+        let copyBtnText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!'
+        setTimeout(() => {
+          copyBtn.textContent = copyBtnText
+        }, 1500)
+      })
+    }
   }
 })
 
