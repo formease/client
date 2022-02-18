@@ -153,7 +153,19 @@ createProjectBtn.addEventListener('click', async function (e) {
     const projectElemHTML = `<li data-project="${data.projectName}">${data.projectName}<small>${data.projectDescription}</small></li>`
     projectList.insertAdjacentHTML('beforeend', projectElemHTML)
 
-    const projectDashboardHTML = `<div class="project-dashboard hidden" data-project-for="${data.projectName}"><div class="project__functions"><button class="project__editBtn" title="edit project details"> <span class="material-icons-outlined material-icons">edit</span></button><button class="project__deleteBtn" title="Delete project"><span class="material-icons-outlined material-icons">delete</span></button></div><div class="project__details"><h2>${data.projectName}</h2><p class="description">${data.projectDescription}</p></div>/div>`
+    const projectDashboardHTML = `<div class="project-dashboard hidden" data-project-for="${data.projectName}">
+    <div class="project__functions">
+      <button class="project__editBtn" title="edit project details">
+        <span class="material-icons-outlined material-icons">edit</span></button
+      ><button class="project__deleteBtn" title="Delete project">
+        <span class="material-icons-outlined material-icons">delete</span>
+      </button>
+    </div>
+    <div class="project__details">
+      <h2>${data.projectName}</h2>
+      <p class="description">${data.projectDescription}</p>
+    </div>
+  </div>`
     mainWrapper.insertAdjacentHTML('beforeend', projectDashboardHTML)
 
     removeOtherDashboard(data.projectName)
