@@ -21,6 +21,9 @@
 :root[data-theme="dark"] body {
   background: var(--content-bg);
 }
+html {
+  font-size: 95%;
+}
 
 body {
   width: 100%;
@@ -193,7 +196,7 @@ main > button[data-create-project-btn] {
   padding: 0.8em var(--default-gap);
 }
 .project__functions > button {
-  padding: 0.2em 0.5em;
+  padding: 0.6em 2.2em;
   cursor: pointer;
   border-radius: 0.3em;
   border: 0;
@@ -212,31 +215,31 @@ main > button[data-create-project-btn] {
   opacity: 0.7;
 }
 .project__main {
-  margin-top: 5em;
-  display: flex;
-  gap: var(--default-gap);
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  margin-top: 3em;
+  margin-bottom: 1em;
   padding-inline: var(--default-gap);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--default-gap);
+  align-items: center;
 }
-.google-link {
+.project__main :is(input[type="url"], input[type="password"]) {
   padding: 1em;
   opacity: .9;
   cursor: text;
-  flex:1;
+  max-width: 40em;
 }
-.copy-btn {
+.project__main button {
   padding: 1em;
   background: transparent;
   border-radius: .5em;
   border: .2em solid grey;
   cursor: pointer;
 }
-.copy-btn:active {
+.project__main  button:active  {
   transform: scale(0.9);
 }
-.copy-btn:hover {
+.project__main  button:hover {
   opacity: 0.7;
 }
 .hidden {
@@ -374,7 +377,7 @@ footer {
   }
 }
 @media (max-width: 30em) {
-  .entered-project-name, .entered-project-description {
+  .entered-project-name, .entered-project-description, .entered-project-discordWebhook {
     margin: 0;
     margin-block: .5em;
     width: 100%;
@@ -382,6 +385,18 @@ footer {
   .entered-project-description ~ label {
     margin-bottom: .4em;
     display: inline-block;
+  }
+  html {
+    font-size: 100%;
+  }  
+}
+@media (min-width: 50em) {
+  .project__main {
+    grid-template-columns: max-content 1fr max-content;
+  }
+  .project__main :is(input[type="url"], input[type="password"]) {
+    width: 80%;
+   justify-self: center;
   }
 }
 @media (min-width: 80em) {
