@@ -1,4 +1,4 @@
-// import Swal from 'sweetalert2'
+import Swal from 'sweetalert2'
 
 // Theme functionality
 const THEME_BTN = document.getElementById("theme-toggler");
@@ -140,9 +140,9 @@ createProjectBtn.addEventListener("click", async function (e) {
     });
     data.projectName = projectName;
   }
-  if (!data.projectName) return;
+  if (!data.projectName) return
 
-  if (projects.find((project) => project.projectName == data.projectName)) {
+  if (projects.find((project) => project.projectName === data.projectName)) {
     Swal.fire({
       icon: "error",
       title: "Already a project with same name",
