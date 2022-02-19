@@ -86,7 +86,7 @@ document.querySelector('[data-sidebar-toggler]').addEventListener('click', () =>
 const createProjectBtn = document.querySelector('[data-create-project-btn]')
 const projectList = document.getElementById('project-list')
 const mainWrapper = document.querySelector('.main__wrapper')
-const projects = []
+let projects = []
 
 const createProjectPopupObj = {
   title: 'Create Project',
@@ -177,17 +177,25 @@ createProjectBtn.addEventListener('click', async function (e) {
       timerProgressBar: true
     })
     projects.push(data)
+    const projectObj = projects[projects.length - 1]
 
     const projectElemHTML = `<li data-project="${data.projectName}">${data.projectName}<small>${data.projectDescription}</small></li>`
     projectList.insertAdjacentHTML('beforeend', projectElemHTML)
 
-    const projectDashboardHTML = `<div class="project-dashboard hidden" data-project-for="${data.projectName}"><div class="project__details"><h2>${data.projectName}</h2><p class="description">${data.projectDescription}</p></div><div class="project__functions"><button class="project__editBtn" title="edit project details"> <span class="material-icons-outlined material-icons">edit</span></button><button class="project__deleteBtn" title="Delete project"><span class="material-icons-outlined material-icons">delete</span></button></div><div class="project__main">${data['Google Support'] ? `<label for="google-link">Spreadsheet link</label><input type="text" class="google-link" id="google-link" value="${'And example of link'}"disabled><button class="copy-btn" data-copy-btn>Copy link</button>` : ''}</div></div>`
+    const projectDashboardHTML = `<div class="project-dashboard hidden" data-project-for="${data.projectName}"><div class="project__details"><h2>${data.projectName}</h2><p class="description">${data.projectDescription}</p></div><div class="project__functions"><button class="project__editBtn" title="edit project details" data-projectEdit-btn> <span class="material-icons-outlined material-icons">edit</span></button><button class="project__deleteBtn" title="Delete project" data-projectDelete-btn><span class="material-icons-outlined material-icons">delete</span></button></div><div class="project__main">${data['Google Support'] ? `<label for="google-link">Spreadsheet link</label><input type="text" class="google-link" id="google-link" value="${'And example of link'}"disabled><button class="copy-btn" data-copy-btn>Copy link</button>` : ''}</div></div>`
     mainWrapper.insertAdjacentHTML('beforeend', projectDashboardHTML)
 
     removeOtherDashboard(data.projectName)
 
+    projectObj.asideProjectElem = projectList.lastElementChild
+    projectObj.mainProjectElem = mainWrapper.lastElementChild
+
     // extra stuff
-    const copyBtn = mainWrapper.lastElementChild.querySelector('[data-copy-btn]')
+    const currentProjectDashboard = mainWrapper.lastElementChild
+    const copyBtn = currentProjectDashboard.querySelector('[data-copy-btn]')
+    const editBtn = currentProjectDashboard.querySelector('[data-projectEdit-btn]')
+    const deleteBtn = currentProjectDashboard.querySelector('[data-projectDelete-btn]')
+
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(copyBtn.previousElementSibling.value)
@@ -198,6 +206,49 @@ createProjectBtn.addEventListener('click', async function (e) {
         }, 1500)
       })
     }
+
+    editBtn.addEventListener('click', async () => {
+      const { value: result } = await Swal.fire({
+        title: 'Edit Project Details',
+        html:
+          `<input type="text" label="Name" placeholder="Enter Project name" value="${data.projectName}" class="swal2-input entered-project-name"/>` +
+          `<input type="text" label="Description" placeholder="Enter Project Description" value="${data.projectDescription}" class="swal2-input entered-project-description"/>`,
+        showCancelButton: true,
+        footer: 'Only these details can be edited at the moment...',
+        confirmButtonText: 'Edit Details',
+        preConfirm: () => {
+          return {
+            projectName: document.querySelector('.entered-project-name').value,
+            projectDescription: document.querySelector('.entered-project-description').value
+          }
+        }
+      })
+      if (!result) return
+      projectObj.projectDescription = result.projectDescription
+      projectObj.projectName = result.projectName
+
+      projectObj.asideProjectElem.innerHTML = `${result.projectName}<small>${result.projectDescription}</small>`
+      projectObj.mainProjectElem.querySelector('h2').textContent = result.projectName
+      projectObj.mainProjectElem.querySelector('.description').textContent = result.projectDescription
+    })
+
+    deleteBtn.addEventListener('click', () => {
+      Swal.fire({
+        title: 'Delete Project?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete Project',
+        html: '<b>Warning</b>- This action is permanent and can\'t be undone.',
+        allowEnterKey: false
+      }).then((result) => {
+        if (!result.isConfirmed) return
+        projectObj.mainProjectElem.previousElementSibling?.classList.remove('hidden') || projectObj.mainProjectElem.nextElementSibling?.classList.remove('hidden')
+        projectObj.asideProjectElem.remove()
+        projectObj.mainProjectElem.remove()
+
+        projects = projects.filter(project => project != projectObj)
+      })
+    })
   }
 })
 
