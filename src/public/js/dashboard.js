@@ -1,4 +1,6 @@
 import Swal from 'sweetalert2'
+import { sidebarInsert, templates } from './templates.js'
+import { createProjectPopUp, projectSuccess, titleCollision, titleError, webhookInput } from './pop-up.js'
 
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
@@ -8,28 +10,19 @@ const preferedTheme = window.matchMedia('(prefers-color-scheme: dark)')
 
 const darkPopupStyleSheet = document.getElementById('popup-dark-theme')
 
-const themesBtnHTML = {
-  dark: `<span class="material-icons-outlined material-icons">
-    dark_mode
-    </span>`,
-  light: `<span class="material-icons-outlined material-icons">
-    light_mode
-    </span>`
-}
-
 const themeChecker = () => {
   if (localTheme) {
     localTheme = localStorage.getItem('theme')
 
     document.documentElement.dataset.theme = localTheme
-    THEME_BTN.innerHTML = themesBtnHTML[localTheme]
+    THEME_BTN.innerHTML = templates[localTheme]
 
     if (localTheme === 'light') darkPopupStyleSheet.remove()
     else if (localTheme === 'dark') document.head.append(darkPopupStyleSheet)
   } else if (preferedTheme.matches) {
     document.documentElement.dataset.theme = 'dark'
 
-    THEME_BTN.innerHTML = themesBtnHTML.dark
+    THEME_BTN.innerHTML = templates.dark
     document.head.append(darkPopupStyleSheet)
 
     localStorage.setItem('theme', 'dark')
@@ -53,13 +46,13 @@ THEME_BTN.addEventListener('click', () => {
   currentTheme = document.documentElement.dataset.theme
   if (currentTheme === 'dark') {
     document.documentElement.dataset.theme = 'light'
-    THEME_BTN.innerHTML = themesBtnHTML.light
+    THEME_BTN.innerHTML = templates.light
     darkPopupStyleSheet.remove()
 
     localStorage.setItem('theme', 'light')
   } else {
     document.documentElement.dataset.theme = 'dark'
-    THEME_BTN.innerHTML = themesBtnHTML.dark
+    THEME_BTN.innerHTML = templates.dark
     localStorage.setItem('theme', 'dark')
 
     document.head.append(darkPopupStyleSheet)
@@ -88,86 +81,25 @@ const projectList = document.getElementById('project-list')
 const mainWrapper = document.querySelector('.main__wrapper')
 let projects = []
 
-const createProjectPopupObj = {
-  title: 'Create Project',
-  html:
-    '<form>' +
-    '<input type="text" label="Name" placeholder="Enter Project name" class="swal2-input entered-project-name"/>' +
-    '<input type="text" label="Description" placeholder="Enter Project Description" class="swal2-input entered-project-description"/>' +
-    '<br><br>' +
-    '<label for="google-support" class="popup-label">Google Drive support</label>' +
-    '<input type="checkbox" label="Google drive support" id="google-support"/>' +
-    '<br>' +
-    '<label for="discord-webhook-support" class="popup-label">Discord Webhook support</label>' +
-    '<input type="checkbox" label="Discord Webhook support" id="discord-webhook-support"/>' + '</form>',
-  showCancelButton: true,
-  confirmButtonText: 'Create Project',
-  preConfirm: () => {
-    return {
-      projectName: document.querySelector('.entered-project-name').value,
-      projectDescription: document.querySelector('.entered-project-description').value,
-      'Google Support': document.getElementById('google-support').checked,
-      'Discord Webhook Support': document.getElementById('discord-webhook-support').checked
-    }
-  }
-}
-
 createProjectBtn.addEventListener('click', async function (e) {
   if (e.defaultPrevented) return
 
-  const { value: data } = await Swal.fire(createProjectPopupObj)
+  const { value: data } = await createProjectPopUp()
   if (!data) return
 
   if (data.projectName.length < 4 || data.projectName.length > 40) {
-    const { value: projectName } = await Swal.fire({
-      title: 'Project name should have at least 4 characters and at maximum 40',
-      input: 'text',
-      icon: 'error',
-      inputLabel: 'Enter Project name',
-      inputValue: data.projectName,
-      inputPlaceholder: 'Project name..',
-      showCancelButton: true,
-      inputAttributes: {
-        autocomplete: 'off'
-      },
-      inputValidator: (value) => {
-        if (value.length < 4) {
-          return 'Name should have at least 4 characters and at maximum 30!'
-        } else if (value.length > 40) {
-          return 'Name should have at maximum 40 characters!'
-        }
-      }
-    })
+    const { value: projectName } = await titleError(data)
     data.projectName = projectName
   }
   if (!data.projectName) return
 
   if (projects.find((project) => project.projectName === data.projectName)) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Already a project with same name',
-      text: 'Please choose a different name for your project',
-      inputAttributes: {
-        autocomplete: 'off'
-      }
-    })
+    titleCollision()
     return
   }
 
   if (data['Discord Webhook Support']) {
-    const { value: webhook } = await Swal.fire({
-      icon: 'info',
-      title: 'One more step! Enter your discord webhook here!',
-      footer:
-        "Don't really know how? Follow the steps-<a href='https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks'> here</a>",
-      input: 'url',
-      inputLabel: 'Discord Webhook url',
-      inputPlaceholder: 'Enter the URL',
-      inputAttributes: {
-        autocomplete: 'off'
-      },
-      showCancelButton: true
-    })
+    const { value: webhook } = await webhookInput()
     if (!webhook) return
     if (!/(https?):\/{2}discord.com\/api\/webhooks\/[0-9]+\//.test(webhook)) {
       return Swal.fire({
@@ -179,36 +111,15 @@ createProjectBtn.addEventListener('click', async function (e) {
     data.discordWebhook = webhook
   }
   if (data && data.projectName.length >= 4 && data.projectName.length <= 40) {
-    Swal.fire({
-      toast: true,
-      icon: 'success',
-      title: 'Project created successfully!',
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 4000,
-      timerProgressBar: true
-    })
+    projectSuccess()
     projects.push(data)
     const projectObj = projects[projects.length - 1]
 
     const projectElemHTML = `<li data-project="${data.projectName}">${data.projectName}<small>${data.projectDescription}</small></li>`
     projectList.insertAdjacentHTML('beforeend', projectElemHTML)
 
-    const projectDashboardHTML = `<div class="project-dashboard hidden" data-project-for="${
-      data.projectName
-    }"><div class="project__details"><h2>${data.projectName}</h2><p class="description">${
-      data.projectDescription
-    }</p></div><div class="project__functions"><button class="project__editBtn" title="Edit project details" data-projectEdit-btn> <span class="material-icons-outlined material-icons">edit</span></button><button class="project__deleteBtn" title="Delete project" data-projectDelete-btn><span class="material-icons-outlined material-icons">delete</span></button></div><div class="project__main">${
-      data['Google Support']
-        ? `<label for="google-link">Spreadsheet link</label><input type="url" class="google-link" id="google-link" value="${'And example of link'}"disabled><button class="copy-btn" data-copy-btn>Copy link</button>`
-        : ''
-    }${
-      data['Discord Webhook Support']
-        ? `<label for="discord-webhook-link">Webhook link</label><input type="password" class="discord-webhook-link" id="discord-webhook-link" value="${data.discordWebhook}" disabled><button class="inp-mode-btn" data-inp-mode-btn>Show link</button>`
-        : ''
-    }</div></div>`
+    const projectDashboardHTML = sidebarInsert(data)
     mainWrapper.insertAdjacentHTML('beforeend', projectDashboardHTML)
-
     removeOtherDashboard(data.projectName)
 
     projectObj.asideProjectElem = projectList.lastElementChild
