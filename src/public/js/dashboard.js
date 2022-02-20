@@ -1,4 +1,6 @@
 import Swal from 'sweetalert2'
+import { sidebarInsert, templates } from './templates.js'
+import { createProjectPopUp, projectSuccess, titleCollision, titleError, webhookInput } from './pop-up.js'
 
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
@@ -8,28 +10,19 @@ const preferedTheme = window.matchMedia('(prefers-color-scheme: dark)')
 
 const darkPopupStyleSheet = document.getElementById('popup-dark-theme')
 
-const themesBtnHTML = {
-  dark: `<span class="material-icons-outlined material-icons">
-    dark_mode
-    </span>`,
-  light: `<span class="material-icons-outlined material-icons">
-    light_mode
-    </span>`
-}
-
 const themeChecker = () => {
   if (localTheme) {
     localTheme = localStorage.getItem('theme')
 
     document.documentElement.dataset.theme = localTheme
-    THEME_BTN.innerHTML = themesBtnHTML[localTheme]
+    THEME_BTN.innerHTML = templates[localTheme]
 
     if (localTheme === 'light') darkPopupStyleSheet.remove()
     else if (localTheme === 'dark') document.head.append(darkPopupStyleSheet)
   } else if (preferedTheme.matches) {
     document.documentElement.dataset.theme = 'dark'
 
-    THEME_BTN.innerHTML = themesBtnHTML.dark
+    THEME_BTN.innerHTML = templates.dark
     document.head.append(darkPopupStyleSheet)
 
     localStorage.setItem('theme', 'dark')
@@ -53,13 +46,13 @@ THEME_BTN.addEventListener('click', () => {
   currentTheme = document.documentElement.dataset.theme
   if (currentTheme === 'dark') {
     document.documentElement.dataset.theme = 'light'
-    THEME_BTN.innerHTML = themesBtnHTML.light
+    THEME_BTN.innerHTML = templates.light
     darkPopupStyleSheet.remove()
 
     localStorage.setItem('theme', 'light')
   } else {
     document.documentElement.dataset.theme = 'dark'
-    THEME_BTN.innerHTML = themesBtnHTML.dark
+    THEME_BTN.innerHTML = templates.dark
     localStorage.setItem('theme', 'dark')
 
     document.head.append(darkPopupStyleSheet)
@@ -86,89 +79,150 @@ document.querySelector('[data-sidebar-toggler]').addEventListener('click', () =>
 const createProjectBtn = document.querySelector('[data-create-project-btn]')
 const projectList = document.getElementById('project-list')
 const mainWrapper = document.querySelector('.main__wrapper')
-
-const createProjectPopupObj = {
-  title: 'Create Project',
-  html:
-    '<input type="text" label="Name" placeholder="Enter Project name" class="swal2-input entered-project-name"/>' +
-    '<input type="text" label="Description" placeholder="Enter Project Description" class="swal2-input entered-project-description"/>' +
-    '<br><br>' +
-    '<label for="google-support" class="popup-label">Google Drive support</label>' +
-    '<input type="checkbox" label="Google drive support" id="google-support"/>' +
-    '<br>' +
-    '<label for="discord-webhook-support" class="popup-label">Discord Webhook support</label>' +
-    '<input type="checkbox" label="Discord Webhook support" id="discord-webhook-support"/>',
-  showCancelButton: true,
-  confirmButtonText: 'Create Project',
-  preConfirm: () => {
-    return {
-      projectName: document.querySelector('.entered-project-name').value,
-      projectDescription: document.querySelector('.entered-project-description').value,
-      'Google Support': document.getElementById('google-support').checked,
-      'Discord Webhook Support': document.getElementById('discord-webhook-support').checked
-    }
-  }
-}
+let projects = []
 
 createProjectBtn.addEventListener('click', async function (e) {
   if (e.defaultPrevented) return
 
-  const { value: data } = await Swal.fire(createProjectPopupObj)
+  const { value: data } = await createProjectPopUp()
   if (!data) return
 
   if (data.projectName.length < 4 || data.projectName.length > 40) {
-    const { value: projectName } = await Swal.fire({
-      title: 'Project name should have at least 4 characters and at maximum 40',
-      input: 'text',
-      icon: 'error',
-      inputLabel: 'Enter Project name',
-      inputValue: data.projectName,
-      inputPlaceholder: 'Project name..',
-      showCancelButton: true,
-      inputAttributes: {
-        autocomplete: 'off'
-      },
-      inputValidator: (value) => {
-        if (value.length < 4) {
-          return 'Name should have at least 4 characters and at maximum 30!'
-        } else if (value.length > 40) {
-          return 'Name should have at maximum 40 characters!'
-        }
-      }
-    })
+    const { value: projectName } = await titleError(data)
     data.projectName = projectName
   }
   if (!data.projectName) return
+
+  if (projects.find((project) => project.projectName === data.projectName)) {
+    titleCollision()
+    return
+  }
+
+  if (data['Discord Webhook Support']) {
+    const { value: webhook } = await webhookInput()
+    if (!webhook) return
+    if (!/(https?):\/{2}discord.com\/api\/webhooks\/[0-9]+\//.test(webhook)) {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Invalid Discord Webhook url',
+        text: 'Please enter a valid Discord Webhook url'
+      })
+    }
+    data.discordWebhook = webhook
+  }
   if (data && data.projectName.length >= 4 && data.projectName.length <= 40) {
-    Swal.fire({
-      toast: true,
-      icon: 'success',
-      title: 'Project created successfully!',
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 4000,
-      timerProgressBar: true
-    })
+    projectSuccess()
+    projects.push(data)
+    const projectObj = projects[projects.length - 1]
 
     const projectElemHTML = `<li data-project="${data.projectName}">${data.projectName}<small>${data.projectDescription}</small></li>`
     projectList.insertAdjacentHTML('beforeend', projectElemHTML)
 
-    const projectDashboardHTML = `<div class="project-dashboard hidden" data-project-for="${data.projectName}">
-    <div class="project__functions">
-      <button class="project__editBtn" title="edit project details">
-        <span class="material-icons-outlined material-icons">edit</span></button
-      ><button class="project__deleteBtn" title="Delete project">
-        <span class="material-icons-outlined material-icons">delete</span>
-      </button>
-    </div>
-    <div class="project__details">
-      <h2>${data.projectName}</h2>
-      <p class="description">${data.projectDescription}</p>
-    </div>
-  </div>`
+    const projectDashboardHTML = sidebarInsert(data)
     mainWrapper.insertAdjacentHTML('beforeend', projectDashboardHTML)
-
     removeOtherDashboard(data.projectName)
+
+    projectObj.asideProjectElem = projectList.lastElementChild
+    projectObj.mainProjectElem = mainWrapper.lastElementChild
+
+    // extra stuff
+    const currentProjectDashboard = mainWrapper.lastElementChild
+    const copyBtn = currentProjectDashboard.querySelector('[data-copy-btn]')
+    const inputModeChangeBtn = currentProjectDashboard.querySelector('[data-inp-mode-btn]')
+    const editBtn = currentProjectDashboard.querySelector('[data-projectEdit-btn]')
+    const deleteBtn = currentProjectDashboard.querySelector('[data-projectDelete-btn]')
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(copyBtn.previousElementSibling.value)
+        const copyBtnText = copyBtn.textContent
+        copyBtn.textContent = 'Copied!'
+        setTimeout(() => {
+          copyBtn.textContent = copyBtnText
+        }, 1500)
+      })
+    }
+    if (inputModeChangeBtn) {
+      inputModeChangeBtn.addEventListener('click', () => {
+        const input = inputModeChangeBtn.previousElementSibling
+        if (input.type === 'url') {
+          input.type = 'password'
+          inputModeChangeBtn.textContent = 'Show link'
+          return
+        }
+        input.type = 'url'
+        inputModeChangeBtn.textContent = 'Hide link'
+      })
+    }
+
+    editBtn.addEventListener('click', async () => {
+      const { value: result } = await Swal.fire({
+        title: 'Edit Project Details',
+        html:
+          '<form>' +
+          `<input type="text" label="Name" placeholder="Enter Project name" value="${data.projectName}" class="swal2-input entered-project-name"/>` +
+          `<input type="text" label="Description" placeholder="Enter Project Description" value="${data.projectDescription}" class="swal2-input entered-project-description"/>` +
+          `${
+            data.discordWebhook
+              ? `<input type="url" label="Discord Webhook URL" placeholder="Enter Discord Webhook" value="${data.discordWebhook}" class="swal2-input entered-project-discordWebhook"/>`
+              : ''
+          }` + '</form>',
+
+        showCancelButton: true,
+        footer: 'Only these details can be edited at the moment...',
+        confirmButtonText: 'Edit Details',
+        preConfirm: () => {
+          return {
+            projectName: document.querySelector('.entered-project-name').value,
+            projectDescription: document.querySelector('.entered-project-description').value,
+            discordWebhook: document.querySelector('.entered-project-discordWebhook').value
+          }
+        }
+      })
+      if (!result) return
+      projectObj.projectDescription = result.projectDescription
+      projectObj.projectName = result.projectName
+
+      projectObj.asideProjectElem.innerHTML = `${result.projectName}<small>${result.projectDescription}</small>`
+      projectObj.mainProjectElem.querySelector('h2').textContent = result.projectName
+      projectObj.mainProjectElem.querySelector('.description').textContent =
+        result.projectDescription
+      if (result.discordWebhook) {
+        try {
+          URL(result.discordWebhook)
+        } catch {
+          return alert('err')
+        }
+        projectObj.mainProjectElem.querySelector('.discord-webhook-link').value = result.discordWebhook
+        projectObj.discordWebhook = result.discordWebhook
+      }
+    })
+
+    deleteBtn.addEventListener('click', () => {
+      // deepcode ignore PromiseNotCaughtGeneral:
+      Swal.fire({
+        title: 'Delete Project?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete Project',
+        html: "<b>Warning</b>- This action is permanent and can't be undone.",
+        allowEnterKey: false
+      }).then((result) => {
+        if (!result.isConfirmed) return
+        const { mainProjectElem, asideProjectElem } = projectObj
+
+        if (mainProjectElem.previousElementSibling) {
+          mainProjectElem.previousElementSibling.classList.remove('hidden')
+        } else {
+          mainProjectElem.nextElementSibling?.classList.remove('hidden')
+        }
+
+        asideProjectElem.remove()
+        mainProjectElem.remove()
+
+        projects = projects.filter((project) => project !== projectObj)
+      })
+    })
   }
 })
 

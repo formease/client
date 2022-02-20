@@ -4,8 +4,8 @@
   box-sizing: border-box;
 }
 :root {
-  --primary-bg: #fcfae4;
-  --secondary-bg: #e6ebe0;
+  --primary-bg: hsl(0, 0%, 95%);
+  --secondary-bg: hsl(0, 0%, 85%);
   --primary-txt: rgb(71, 71, 71);
 
   --default-gap: 1.2em;

@@ -3,7 +3,8 @@ const router = express.Router()
 const methods = require('../middleware/method')
 const discordMessage = require('../middleware/discord')
 
-router.post('/f/:userid/:formid', methods(['POST']), (req, res) => {
+// file deepcode ignore NoRateLimitingForExpensiveWebOperation: <Already applied>
+router.all('/f/:userid/:formid', methods(['POST']), (req, res) => {
   const userId = req.params.userid
   const formId = req.params.formid
   if (!userId || !formId) {
@@ -11,8 +12,8 @@ router.post('/f/:userid/:formid', methods(['POST']), (req, res) => {
   }
   res.render('submit')
   try {
-    discordMessage(req.body).then(() => {
-      console.log('Message sent')
+    discordMessage(req.body).catch((err) => {
+      console.log(err)
     })
   } catch {
     console.log('Message not sent')
