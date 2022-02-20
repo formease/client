@@ -26,7 +26,7 @@ import Swal from 'sweetalert2'
         footer: 'Looks like you did enough work..',
         allowEscapeKey: false,
         allowEnterKey: false
-      }).then((result) => {
+      }).catch((err) => { console.log(err) }).then((result) => {
         if (result.isConfirmed) {
           const auth = getAuth()
           signOut(auth).then(() => {
