@@ -18,6 +18,7 @@ import Swal from 'sweetalert2'
 
   logoutBtn.addEventListener('click', () => {
     try {
+      // deepcode ignore PromiseNotCaughtGeneral: <not requred>
       Swal.fire({
         title: 'Really wanna logout?',
         icon: 'question',
@@ -26,7 +27,7 @@ import Swal from 'sweetalert2'
         footer: 'Looks like you did enough work..',
         allowEscapeKey: false,
         allowEnterKey: false
-      }).catch((err) => { console.log(err) }).then((result) => {
+      }).then((result) => {
         if (result.isConfirmed) {
           const auth = getAuth()
           signOut(auth).then(() => {
