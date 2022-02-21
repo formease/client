@@ -93,7 +93,7 @@ createProjectBtn.addEventListener('click', async function (e) {
     data.projectName = projectName
   }
   if (!data.projectName) return
-  if (data.projectDescription.length < 5 || data.projectName.length > 100) {
+  if (data.projectDescription.length < 5 || data.projectDescription.length > 100) {
     const { value: projectDescription } = await descriptionError(data)
     data.projectDescription = projectDescription
   }
