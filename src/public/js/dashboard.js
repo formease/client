@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 import { sidebarInsert, templates } from './templates.js'
-import { createProjectPopUp, deleteProject, editProject, projectSuccess, titleCollision, titleError, webhookInput } from './pop-up.js'
+import { createProjectPopUp, deleteProject, descriptionError, editProject, projectSuccess, titleCollision, titleError, webhookInput } from './pop-up.js'
 import { sendRequest } from './send.js'
 
 // Theme functionality
@@ -93,6 +93,10 @@ createProjectBtn.addEventListener('click', async function (e) {
     data.projectName = projectName
   }
   if (!data.projectName) return
+  if (data.projectDescription.length < 5 || data.projectName.length > 100) {
+    const { value: projectDescription } = await descriptionError(data)
+    data.projectDescription = projectDescription
+  }
 
   if (projects.find((project) => project.projectName === data.projectName)) {
     titleCollision()

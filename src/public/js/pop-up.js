@@ -40,6 +40,27 @@ export const titleError = async (data) => {
     }
   })
 }
+export const descriptionError = async (data) => {
+  return await Swal.fire({
+    title: 'Project description should have at least 5 characters and at maximum 100',
+    input: 'text',
+    icon: 'error',
+    inputLabel: 'Enter Project description',
+    inputValue: data.projectName,
+    inputPlaceholder: 'Project description..',
+    showCancelButton: true,
+    inputAttributes: {
+      autocomplete: 'off'
+    },
+    inputValidator: (value) => {
+      if (value.length < 5) {
+        return 'Name should have at least 5 characters and at maximum 30!'
+      } else if (value.length > 100) {
+        return 'Name should have at maximum 100 characters!'
+      }
+    }
+  })
+}
 
 export const titleCollision = () => {
   Swal.fire({
