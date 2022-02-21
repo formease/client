@@ -68,7 +68,7 @@ export const webhookInput = async () => {
     inputValidator: (value) => {
       if (!/(https?):\/{2}discord.com\/api\/webhooks\/[0-9]+\//.test(value)) {
         return 'Please enter a valid Discord Webhook url'
-      } 
+      }
     }
   })
 }

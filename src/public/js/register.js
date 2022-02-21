@@ -6,7 +6,7 @@ const preferedTheme = window.matchMedia('(prefers-color-scheme: dark)')
 
 const themeChecker = () => {
   if (localTheme) {
-    localTheme = localStorage.getItem('theme') 
+    localTheme = localStorage.getItem('theme')
     document.documentElement.dataset.theme = localTheme
   } else if (preferedTheme.matches) {
     document.documentElement.dataset.theme = 'dark'
@@ -16,11 +16,11 @@ const themeChecker = () => {
   }
 }
 themeChecker()
-window.addEventListener('storage', (e) =>{
-  let storageArea = e.storageArea;
-  let keyChanged = e.key;
+window.addEventListener('storage', (e) => {
+  const storageArea = e.storageArea
+  const keyChanged = e.key
 
-  if (keyChanged !== 'theme') return;
+  if (keyChanged !== 'theme') return
   localStorage.setItem(keyChanged, storageArea.theme)
   themeChecker()
 })
