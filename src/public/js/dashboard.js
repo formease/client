@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2'
 import { sidebarInsert, templates } from './templates.js'
-import { createProjectPopUp, projectSuccess, titleCollision, titleError, webhookInput } from './pop-up.js'
+import { createProjectPopUp, deleteProject, editProject, projectSuccess, titleCollision, titleError, webhookInput } from './pop-up.js'
+import { sendRequest } from './send.js'
 
 // Theme functionality
 const THEME_BTN = document.getElementById('theme-toggler')
@@ -113,7 +114,9 @@ createProjectBtn.addEventListener('click', async function (e) {
   if (data && data.projectName.length >= 4 && data.projectName.length <= 40) {
     projectSuccess()
     projects.push(data)
+    // project creation results here 👇
     const projectObj = projects[projects.length - 1]
+    sendRequest(projectObj)
 
     const projectElemHTML = `<li data-project="${data.projectName}">${data.projectName}<small>${data.projectDescription}</small></li>`
     projectList.insertAdjacentHTML('beforeend', projectElemHTML)
@@ -156,29 +159,7 @@ createProjectBtn.addEventListener('click', async function (e) {
     }
 
     editBtn.addEventListener('click', async () => {
-      const { value: result } = await Swal.fire({
-        title: 'Edit Project Details',
-        html:
-          '<form>' +
-          `<input type="text" label="Name" placeholder="Enter Project name" value="${data.projectName}" class="swal2-input entered-project-name"/>` +
-          `<input type="text" label="Description" placeholder="Enter Project Description" value="${data.projectDescription}" class="swal2-input entered-project-description"/>` +
-          `${
-            data.discordWebhook
-              ? `<input type="url" label="Discord Webhook URL" placeholder="Enter Discord Webhook" value="${data.discordWebhook}" class="swal2-input entered-project-discordWebhook"/>`
-              : ''
-          }` + '</form>',
-
-        showCancelButton: true,
-        footer: 'Only these details can be edited at the moment...',
-        confirmButtonText: 'Edit Details',
-        preConfirm: () => {
-          return {
-            projectName: document.querySelector('.entered-project-name').value,
-            projectDescription: document.querySelector('.entered-project-description').value,
-            discordWebhook: document.querySelector('.entered-project-discordWebhook').value
-          }
-        }
-      })
+      const { value: result } = await editProject(data)
       if (!result) return
       projectObj.projectDescription = result.projectDescription
       projectObj.projectName = result.projectName
@@ -188,10 +169,12 @@ createProjectBtn.addEventListener('click', async function (e) {
       projectObj.mainProjectElem.querySelector('.description').textContent =
         result.projectDescription
       if (result.discordWebhook) {
-        try {
-          URL(result.discordWebhook)
-        } catch {
-          return alert('err')
+        if (!/(https?):\/{2}discord.com\/api\/webhooks\/[0-9]+\//.test(result.discordWebhook)) {
+          return Swal.fire({
+            icon: 'error',
+            title: 'Invalid Discord Webhook url',
+            text: 'Please enter a valid Discord Webhook url'
+          })
         }
         projectObj.mainProjectElem.querySelector('.discord-webhook-link').value = result.discordWebhook
         projectObj.discordWebhook = result.discordWebhook
@@ -200,14 +183,7 @@ createProjectBtn.addEventListener('click', async function (e) {
 
     deleteBtn.addEventListener('click', () => {
       // deepcode ignore PromiseNotCaughtGeneral:
-      Swal.fire({
-        title: 'Delete Project?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Delete Project',
-        html: "<b>Warning</b>- This action is permanent and can't be undone.",
-        allowEnterKey: false
-      }).then((result) => {
+      deleteProject().then((result) => {
         if (!result.isConfirmed) return
         const { mainProjectElem, asideProjectElem } = projectObj
 

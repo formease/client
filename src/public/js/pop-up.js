@@ -79,3 +79,40 @@ export const projectSuccess = () => {
     timerProgressBar: true
   })
 }
+
+export const editProject = async (data) => {
+  return await Swal.fire({
+    title: 'Edit Project Details',
+    html:
+      '<form>' +
+      `<input type="text" label="Name" placeholder="Enter Project name" value="${data.projectName}" class="swal2-input entered-project-name"/>` +
+      `<input type="text" label="Description" placeholder="Enter Project Description" value="${data.projectDescription}" class="swal2-input entered-project-description"/>` +
+      `${
+        data.discordWebhook
+          ? `<input type="url" label="Discord Webhook URL" placeholder="Enter Discord Webhook" value="${data.discordWebhook}" class="swal2-input entered-project-discordWebhook"/>`
+          : ''
+      }` + '</form>',
+
+    showCancelButton: true,
+    footer: 'Only these details can be edited at the moment...',
+    confirmButtonText: 'Edit Details',
+    preConfirm: () => {
+      return {
+        projectName: document.querySelector('.entered-project-name').value,
+        projectDescription: document.querySelector('.entered-project-description').value,
+        discordWebhook: document.querySelector('.entered-project-discordWebhook').value
+      }
+    }
+  })
+}
+
+export const deleteProject = async () => {
+  return await Swal.fire({
+    title: 'Delete Project?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Delete Project',
+    html: "<b>Warning</b>- This action is permanent and can't be undone.",
+    allowEnterKey: false
+  })
+}
