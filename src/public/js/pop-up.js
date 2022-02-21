@@ -64,7 +64,12 @@ export const webhookInput = async () => {
     inputAttributes: {
       autocomplete: 'off'
     },
-    showCancelButton: true
+    showCancelButton: true,
+    inputValidator: (value) => {
+      if (!/(https?):\/{2}discord.com\/api\/webhooks\/[0-9]+\//.test(value)) {
+        return 'Please enter a valid Discord Webhook url'
+      } 
+    }
   })
 }
 
@@ -100,7 +105,7 @@ export const editProject = async (data) => {
       return {
         projectName: document.querySelector('.entered-project-name').value,
         projectDescription: document.querySelector('.entered-project-description').value,
-        discordWebhook: document.querySelector('.entered-project-discordWebhook').value
+        discordWebhook: document.querySelector('.entered-project-discordWebhook')?.value
       }
     }
   })

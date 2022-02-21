@@ -102,13 +102,6 @@ createProjectBtn.addEventListener('click', async function (e) {
   if (data['Discord Webhook Support']) {
     const { value: webhook } = await webhookInput()
     if (!webhook) return
-    if (!/(https?):\/{2}discord.com\/api\/webhooks\/[0-9]+\//.test(webhook)) {
-      return Swal.fire({
-        icon: 'error',
-        title: 'Invalid Discord Webhook url',
-        text: 'Please enter a valid Discord Webhook url'
-      })
-    }
     data.discordWebhook = webhook
   }
   if (data && data.projectName.length >= 4 && data.projectName.length <= 40) {
