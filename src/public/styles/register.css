@@ -50,6 +50,7 @@ main {
   background-color: var(--primary-bg);
   border-radius: 0.55em;
   box-shadow: 0 0 5px grey;
+  display: none;
 }
 html[data-theme="dark"] main {
   box-shadow: 0 0 5px #757575;

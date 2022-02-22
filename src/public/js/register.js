@@ -41,6 +41,7 @@ const runner = async () => {
       console.log('User is signed in')
       document.location.href = '/dashboard'
     } else {
+      document.querySelector('main').style.display = 'block'
       console.info('no user')
     }
   })

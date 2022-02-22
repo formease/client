@@ -158,6 +158,19 @@ createProjectBtn.addEventListener('click', async function (e) {
     editBtn.addEventListener('click', async () => {
       const { value: result } = await editProject(data)
       if (!result) return
+      if (result.projectName.length < 4 || result.projectName.length > 40) {
+        const { value: projectName } = await titleError(result)
+        result.projectName = projectName
+      }
+      if (!result.projectName) return
+      if (result.projectDescription.length < 5 || result.projectDescription.length > 100) {
+        const { value: projectDescription } = await descriptionError(result)
+        result.projectDescription = projectDescription
+      }
+      if (projects.find((project) => project.projectName === result.projectName)) {
+        titleCollision()
+        return
+      }
       projectObj.projectDescription = result.projectDescription
       projectObj.projectName = result.projectName
 
