@@ -20,10 +20,19 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 // Custom Routes Start
-import './routes/auth'
 import './routes/dashboard'
+import './routes/create'
 // Custom Routes end
 
 Route.get('/', async ({ view }) => {
   return view.render('welcome')
+})
+
+Route.get('auth', async ({ view }) => {
+  return view.render('auth')
+})
+
+// 404 handler
+Route.get('*', async ({ view }) => {
+  return view.render('errors/not-found')
 })

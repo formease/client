@@ -1,0 +1,41 @@
+{
+  "entrypoints": {
+    "register": {
+      "css": [
+        "/assets/register.9342b074.css"
+      ],
+      "js": [
+        "/assets/register.e642c2cf.js"
+      ]
+    },
+    "dashboard": {
+      "css": [
+        "/assets/dashboard.5deec5b5.css"
+      ],
+      "js": [
+        "/assets/dashboard.37c2f71c.js"
+      ]
+    },
+    "dash_auth": {
+      "js": [
+        "/assets/dash_auth.e76bcebe.js"
+      ]
+    },
+    "main": {
+      "css": [
+        "/assets/main.ea36b529.css"
+      ],
+      "js": [
+        "/assets/main.c1959bdb.js"
+      ]
+    },
+    "prism": {
+      "css": [
+        "/assets/prism.ee9c60c3.css"
+      ],
+      "js": [
+        "/assets/prism.0ec38a41.js"
+      ]
+    }
+  }
+}
