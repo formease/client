@@ -13,5 +13,6 @@ exports.default = Env_1.default.rules({
     SESSION_DRIVER: Env_1.default.schema.string(),
     DRIVE_DISK: Env_1.default.schema.enum(['local']),
     NODE_ENV: Env_1.default.schema.enum(['development', 'production', 'testing']),
+    DB_CONNECTION: Env_1.default.schema.string(),
 });
 //# sourceMappingURL=env.js.map
