@@ -1,14 +1,14 @@
 {
-  "assets/register.css": "http://localhost:8080/assets/register.css",
-  "assets/register.js": "http://localhost:8080/assets/register.js",
-  "assets/dashboard.css": "http://localhost:8080/assets/dashboard.css",
-  "assets/dashboard.js": "http://localhost:8080/assets/dashboard.js",
-  "assets/dash_auth.js": "http://localhost:8080/assets/dash_auth.js",
-  "assets/main.css": "http://localhost:8080/assets/main.css",
-  "assets/main.js": "http://localhost:8080/assets/main.js",
-  "assets/prism.css": "http://localhost:8080/assets/prism.css",
-  "assets/prism.js": "http://localhost:8080/assets/prism.js",
-  "assets/images/avatar.png": "http://localhost:8080/assets/images/avatar.050bdd8a.png",
-  "assets/images/google-logo.png": "http://localhost:8080/assets/images/google-logo.39c52b1b.png",
-  "assets/images/github-logo.png": "http://localhost:8080/assets/images/github-logo.d8c6d6c9.png"
+  "assets/register.css": "/assets/register.9342b074.css",
+  "assets/register.js": "/assets/register.e642c2cf.js",
+  "assets/dashboard.css": "/assets/dashboard.5deec5b5.css",
+  "assets/dashboard.js": "/assets/dashboard.37c2f71c.js",
+  "assets/dash_auth.js": "/assets/dash_auth.e76bcebe.js",
+  "assets/main.css": "/assets/main.ea36b529.css",
+  "assets/main.js": "/assets/main.c1959bdb.js",
+  "assets/prism.css": "/assets/prism.ee9c60c3.css",
+  "assets/prism.js": "/assets/prism.0ec38a41.js",
+  "assets/images/avatar.png": "/assets/images/avatar.050bdd8a.png",
+  "assets/images/google-logo.png": "/assets/images/google-logo.39c52b1b.png",
+  "assets/images/github-logo.png": "/assets/images/github-logo.d8c6d6c9.png"
 }
