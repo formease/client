@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--<%- include('../partials/head.ejs') %>-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{asset('assets/main.css')}}" />
+
+    <link rel="stylesheet" href="{{asset('assets/prism.css')}}" />
+    <script src="{{asset('assets/prism.js')}}" type="module"></script>
+    <script src="{{asset('assets/main.js')}}" type="module"></script>
+
+    <title>FormEase - Build Forms with Ease</title>
+  </head>
+  <body id="main-page">
+    <a href="#maincontent" class="skip-link">Skip to main content &RightArrow;</a>
+    <header>
+      <div>FormEase</div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="/auth">Usage</a></li>
+          <li><a href="//github.com/formease/client" target="_blank">Github</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="user-button">
+        <a href="#" id="auth-button" aria-label="Click the link to Join us.">Join Us</a>
+      </div>
+    </header>
+    <main id="maincontent">
+      <section class="landing-section" aria-labelledby="landing-section__title">
+        <h1 id="landing-section__title">Get form data easily and instantly!</h1>
+        <p>Use our api to submit your form. No server code left for you!</p>
+        <div class="example-section">
+          <h2 aria-label="Example for code">Example:-</h2>
+          <pre aria-hidden="true"><code class="language-html" id="example-code">
+&lt;form action="https://formease.io/f/{form_id}" method="post">
+    &lt;label for="email">Your Email&lt;/label>
+    &lt;input name="Email" id="email" type="email">
+    &lt;textarea name="message" id="message" placeholder="Type your message here">&lt;textarea>
+    &lt;input type="submit" value="Submit">
+&lt;/form>
+ </code></pre>
+        </div>
+      </section>
+      <section class="secondary-info" aria-labelledby="secondary-info__title">
+        <h2 id="secondary-info__title">Build Forms Easily</h2>
+        <article class="card">
+          <h3>PowerFul forms</h3>
+          <p>FormEase forms are very fast to work with your workflow.</p>
+        </article>
+        <article class="card">
+          <h3>Simple Usage</h3>
+          <p>Just put blah blah and service will work perfectly!</p>
+        </article>
+        <article class="card">
+          <h3>Browser Support</h3>
+          <p>For browser support, good to tell that we ven support netscape!</p>
+        </article>
+      </section>
+    </main>
+    <footer>
+      <div class="logo">FormEase</div>
+      <div class="footer__signup">
+        <h4>Try Now!</h4>
+        <a href="/auth" class="footer__signup_btn">Register</a>
+      </div>
+    </footer>
+  </body>
+</html>
