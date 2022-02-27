@@ -1,0 +1,41 @@
+{
+  "entrypoints": {
+    "register": {
+      "css": [
+        "http://localhost:8080/assets/register.css"
+      ],
+      "js": [
+        "http://localhost:8080/assets/register.js"
+      ]
+    },
+    "dashboard": {
+      "css": [
+        "http://localhost:8080/assets/dashboard.css"
+      ],
+      "js": [
+        "http://localhost:8080/assets/dashboard.js"
+      ]
+    },
+    "dash_auth": {
+      "js": [
+        "http://localhost:8080/assets/dash_auth.js"
+      ]
+    },
+    "main": {
+      "css": [
+        "http://localhost:8080/assets/main.css"
+      ],
+      "js": [
+        "http://localhost:8080/assets/main.js"
+      ]
+    },
+    "prism": {
+      "css": [
+        "http://localhost:8080/assets/prism.css"
+      ],
+      "js": [
+        "http://localhost:8080/assets/prism.js"
+      ]
+    }
+  }
+}
