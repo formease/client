@@ -1,56 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "formease",
-  "version": "0.0.0",
-  "description": "need to decide yet",
-  "main": "src/app.js",
-  "scripts": {
-    "test": "nodemon src/app.js",
-    "start": "pm2-runtime start ecosystem.config.js --env production",
-    "devStart": "node src/app.js",
-    "bat": "start.bat",
-    "build": "node build.config.js",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint src/**/*.js --fix"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/formease/Client.git"
-  },
-  "keywords": [
-    "need-to-decide"
-  ],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/formease/Client/issues"
-  },
-  "homepage": "https://github.com/formease/Client#readme",
-  "dependencies": {
-    "colors": "^1.4.0",
-    "compression": "^1.7.4",
-    "cors": "^2.8.5",
-    "date-fns": "^2.28.0",
-    "dotenv": "^16.0.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.2",
-    "express-rate-limit": "^6.2.0",
-    "firebase": "^9.6.6",
-    "googleapis": "^95.0.0",
-    "helmet": "^5.0.2",
-    "mysql2": "^2.3.3",
-    "node-fetch": "^2.6.7",
-    "pm2": "^5.1.2",
-    "sweetalert2": "^11.4.0"
-  },
-  "devDependencies": {
-    "esbuild": "^0.14.18",
-    "eslint": "^7.32.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.2.0"
-=======
   "name": "formado",
   "version": "1.0.0",
   "private": true,
@@ -88,6 +36,5 @@
     "regenerator-runtime": "^0.13.9",
     "source-map-support": "^0.5.21",
     "sweetalert2": "^11.4.4"
->>>>>>> eafc7911c3f568869b777bd9f415fb04a31e83e2
   }
 }

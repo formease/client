@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../js/send.js"],
-  "sourcesContent": ["export const sendRequest = async (request) => {\r\n  const response = await fetch('/createForm', {\r\n    method: 'POST',\r\n    headers: {\r\n      'Content-Type': 'application/json'\r\n    },\r\n    body: JSON.stringify(request)\r\n  })\r\n  if (response.status !== 200) {\r\n    alert('Error Creating a Porject: ' + response.status)\r\n    console.error('Error Creating a Porject: ' + response.status)\r\n  }\r\n}\r\n"],
-  "mappings": "MAAO,GAAM,GAAc,KAAO,IAAY,CAC5C,GAAM,GAAW,KAAM,OAAM,cAAe,CAC1C,OAAQ,OACR,QAAS,CACP,eAAgB,oBAElB,KAAM,KAAK,UAAU,KAEvB,AAAI,EAAS,SAAW,KACtB,OAAM,6BAA+B,EAAS,QAC9C,QAAQ,MAAM,6BAA+B,EAAS",
-  "names": []
-}

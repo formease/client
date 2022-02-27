@@ -1,18 +1,4 @@
 {
-<<<<<<< HEAD
-  "env": {
-    "browser": true,
-    "commonjs": true,
-    "es2021": true,
-    "node": true
-  },
-  "extends": ["standard"],
-  "parserOptions": {
-    "ecmaVersion": "latest"
-  },
-  "rules": {
-    "no-console": "off"
-=======
   "extends": ["plugin:adonis/typescriptApp", "prettier"],
   "plugins": ["prettier"],
   "rules": {
@@ -22,6 +8,5 @@
         "endOfLine": "auto"
       }
     ]
->>>>>>> eafc7911c3f568869b777bd9f415fb04a31e83e2
   }
 }
