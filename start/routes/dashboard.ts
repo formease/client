@@ -1,22 +1,11 @@
 import Route from '@ioc:Adonis/Core/Route'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 // file deepcode ignore NoRateLimitingForExpensiveWebOperation: <Already applied>
 
-Route.get('/dashboard', async ({ view }) => {
+Route.get('/dashboard', async ({ view, request }) => {
+  const data = await Database.from('users').where('uid', request.cookiesList().uid)
   return view.render('dashboard', {
-    data: [
-      {
-        projectName: 'hello',
-        projectDescription: 'world',
-      },
-      {
-        projectName: 'hello2',
-        projectDescription: 'world2',
-      },
-    ],
+    data: data,
   })
 })
-
-/*
-        <li data-project="${data.projectName}" role="tab" tabindex="0">${data.projectName}<small>${data.projectDescription}</small></li>
-*/

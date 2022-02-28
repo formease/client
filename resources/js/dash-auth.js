@@ -10,6 +10,8 @@ import 'regenerator-runtime/runtime'
     if (user) {
       console.log('User is signed in')
       document.getElementById('user_profile_photo').src = user.photoURL
+      localStorage.setItem('uid', user.uid)
+      document.cookie = `uid=${user.uid}`
     } else {
       console.info('no user')
       document.location.href = '/auth'

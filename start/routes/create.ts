@@ -6,10 +6,10 @@ import Database from '@ioc:Adonis/Lucid/Database'
 Route.post('/createForm', async ({ request, response }) => {
   console.log(request.body())
   await Database.table('users').insert({
-    uid: 'asdas',
-    name: `${request.body().projectName}`,
-    description: `${request.body().projectDescription}`,
-    discord: `${request.body().discordWebhook}`,
+    uid: `${request.body().user}`,
+    name: `${request.body().request.projectName}`,
+    description: `${request.body().request.projectDescription}`,
+    discord: `${request.body().request.discordWebhook}`,
   })
   return response.send({
     status: 200,

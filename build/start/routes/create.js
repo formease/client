@@ -8,10 +8,10 @@ const Database_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Lucid/D
 Route_1.default.post('/createForm', async ({ request, response }) => {
     console.log(request.body());
     await Database_1.default.table('users').insert({
-        uid: 'asdas',
-        name: `${request.body().projectName}`,
-        description: `${request.body().projectDescription}`,
-        discord: `${request.body().discordWebhook}`,
+        uid: `${request.body().user}`,
+        name: `${request.body().request.projectName}`,
+        description: `${request.body().request.projectDescription}`,
+        discord: `${request.body().request.discordWebhook}`,
     });
     return response.send({
         status: 200,
