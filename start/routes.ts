@@ -31,8 +31,3 @@ Route.get('/', async ({ view }) => {
 Route.get('auth', async ({ view }) => {
   return view.render('auth')
 })
-
-// 404 handler
-Route.get('*', async ({ view }) => {
-  return view.render('errors/not-found')
-})
