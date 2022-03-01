@@ -19,14 +19,14 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-// Custom Routes Start
-import './routes/dashboard'
-import './routes/create'
-// Custom Routes end
 
 Route.get('/', async ({ view }) => {
   return view.render('welcome')
 })
+
+Route.get('/dashboard', 'DashboardController.index')
+
+Route.post('/createForm', 'CreatesController.index')
 
 Route.get('auth', async ({ view }) => {
   return view.render('auth')
