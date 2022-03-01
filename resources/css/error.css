@@ -52,13 +52,15 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 1.5em;
 }
 p {
     font-size: 1.5rem;
     color: var(--content-clr);
-    max-width: 60ch;
     line-height: 1.6;
+    max-width: 60ch;
 }
+
 a {
     color: var(--a-clr);
 }
