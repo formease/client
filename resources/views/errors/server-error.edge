@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../../css/error.css">
-    <link rel="shortcut icon" href="../../../public/error-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{assets('assets/error.css')}}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/error-logo.png') }}" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
     <main>
         <section aria-label="Error 500 - Server Error">
             <h1 aria-hidden="true">500</h1>
-            <img src="../../images/error-500.png" width="600" height="600" alt="">
+            <img src="{{ asset('assets/images/avatar.png') }}" width="600" height="600" alt="">
             <h2>There's a Leak in the Website</h2>
             <p>Looks like there is some problem with server, better to try again after few minutes..</p>
         </section>

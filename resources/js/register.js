@@ -48,8 +48,6 @@ const runner = async () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('User is signed in')
-      localStorage.setItem('uid', user.uid)
-      document.cookie = `uid=${user.uid}`
       document.location.href = '/dashboard'
     } else {
       document.querySelector('main').style.display = 'block'

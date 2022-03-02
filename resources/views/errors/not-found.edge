@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../../css/error.css">
-    <link rel="shortcut icon" href="../../../public/error-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{asset('assets/error.css')}}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/avatar.png') }}" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,7 @@
     <main>
         <section aria-label="Error 404 - Page not found">
             <h1 aria-hidden="true">404</h1>
-            <img src="../../images/error-404.png" width="600" height="600" alt="">
+            <img src="{{ asset('assets/images/error-404.png') }}" width="600" height="600" alt="">
             <h2>Dog ate the page</h2>
             <p>Woof, the dog ate the page, let's go back and leave him here. <a href="/">Click here to go back home.</a>
             </p>

@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../../css/error.css">
-    <link rel="shortcut icon" href="../../../public/error-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('assets/error.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/avatar.png') }}" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,7 +83,7 @@
         <section aria-label="Error 403 - ">
             <h1 aria-hidden="true">403</h1>
             <div class="wrapper">
-                <img src="../../images/error-403.png" alt="" width="600" height="600">
+                <img src="{{ asset('assets/images/error-403.png') }}" alt="" width="600" height="600">
                 <h2>Caution! This Page is Cordoned Off</h2>
                 <p><strong>Forbidden!</strong> You don't have permission to check this page... I wonder what you have done!</p>
             </div>

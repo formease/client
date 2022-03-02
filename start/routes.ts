@@ -24,8 +24,10 @@ Route.get('/', async ({ view }) => {
   return view.render('welcome')
 })
 
-Route.get('/dashboard', 'DashboardController.index')
-
+Route.group(() => {
+  Route.on('/dashboard').redirect('/')
+  Route.get('/dashboard/:id', 'DashboardController.index')
+})
 Route.post('/createForm', 'CreatesController.index')
 
 Route.get('auth', async ({ view }) => {

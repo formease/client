@@ -52,6 +52,7 @@ Encore.addEntries({
   dash_auth: './resources/js/dash-auth.js',
   main: './resources/js/main.js',
   prism: './resources/js/prism.js',
+  error: './resources/css/error.css',
 })
 
 /*

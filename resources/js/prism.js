@@ -1,6 +1,5 @@
-/* PrismJS 1.26.0
-https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css */
 /* eslint-disable */
+
 import '../css/prism.css'
 const _self =
   typeof window !== 'undefined'
@@ -146,6 +145,7 @@ const Prism = (function (u) {
       M.hooks.run('before-highlightall', r),
         (r.elements = Array.prototype.slice.apply(r.container.querySelectorAll(r.selector))),
         M.hooks.run('before-all-elements-highlight', r)
+      // file deepcode ignore OperatorPrecedence: <not needed>
       for (var a, i = 0; (a = r.elements[i++]); ) M.highlightElement(a, !0 === n, r.callback)
     },
     highlightElement: function (e, n, t) {
@@ -356,6 +356,7 @@ const Prism = (function (u) {
         (M.disableWorkerMessageHandler ||
           u.addEventListener(
             'message',
+            // deepcode ignore InsufficientValidation: <not needed>
             function (e) {
               const n = JSON.parse(e.data)
               const t = n.language

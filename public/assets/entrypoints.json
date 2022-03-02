@@ -36,6 +36,14 @@
       "js": [
         "http://localhost:8080/assets/prism.js"
       ]
+    },
+    "error": {
+      "css": [
+        "http://localhost:8080/assets/error.css"
+      ],
+      "js": [
+        "http://localhost:8080/assets/error.js"
+      ]
     }
   }
 }
