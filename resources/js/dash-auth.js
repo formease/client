@@ -33,6 +33,7 @@ import 'regenerator-runtime/runtime'
           const auth = getAuth()
           signOut(auth)
             .then(() => {
+              localStorage.removeItem('user')
               document.location.href = '/'
             })
             .catch((error) => {

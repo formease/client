@@ -9,6 +9,7 @@ import '../css/main.css'
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('User is signed in')
+      localStorage.setItem('user', user.uid)
       document.getElementById('auth-button').textContent = 'Dashboard'
       document.getElementById('auth-button').href = `dashboard/${user.uid}`
     } else {

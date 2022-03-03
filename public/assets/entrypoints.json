@@ -44,6 +44,11 @@
       "js": [
         "http://localhost:8080/assets/error.js"
       ]
+    },
+    "theme": {
+      "js": [
+        "http://localhost:8080/assets/theme.js"
+      ]
     }
   }
 }

@@ -10,6 +10,7 @@
   "assets/prism.js": "http://localhost:8080/assets/prism.js",
   "assets/error.css": "http://localhost:8080/assets/error.css",
   "assets/error.js": "http://localhost:8080/assets/error.js",
+  "assets/theme.js": "http://localhost:8080/assets/theme.js",
   "assets/images/error-404.png": "http://localhost:8080/assets/images/error-404.f552deae.png",
   "assets/images/error-403.png": "http://localhost:8080/assets/images/error-403.b3785004.png",
   "assets/images/error-500.png": "http://localhost:8080/assets/images/error-500.e0864a9d.png",

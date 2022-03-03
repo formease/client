@@ -18,7 +18,7 @@ export const templates = {
     </span>`,
 }
 
-export const sidebarInsert = (data) => {
+export const mainInsert = (data) => {
   const displayElem = `<article class="project-dashboard hidden" data-project-for="${
     data.projectName
   }" role="tabpanel"><div class="project__details"><h2>${
