@@ -107,6 +107,17 @@ export const projectSuccess = () => {
     timerProgressBar: true,
   })
 }
+export const projectFail = () => {
+  Swal.fire({
+    toast: true,
+    icon: 'error',
+    title: 'Project cannot be created!',
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+  })
+}
 
 export const editProject = async (data) => {
   return await Swal.fire({

@@ -19,7 +19,7 @@ import 'regenerator-runtime/runtime'
 
   logoutBtn.addEventListener('click', () => {
     try {
-      // deepcode ignore PromiseNotCaughtGeneral: <not requred>
+      // deepcode ignore PromiseNotCaughtGeneral: <not required>
       Swal.fire({
         title: 'Really wanna logout?',
         icon: 'question',
@@ -33,8 +33,7 @@ import 'regenerator-runtime/runtime'
           const auth = getAuth()
           signOut(auth)
             .then(() => {
-              localStorage.removeItem('uid')
-              document.cookie = `uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`
+              localStorage.removeItem('user')
               document.location.href = '/'
             })
             .catch((error) => {

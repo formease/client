@@ -4,9 +4,7 @@ import Logger from '@ioc:Adonis/Core/Logger'
 export default class AppProvider {
   constructor(protected app: ApplicationContract) {}
 
-  public register() {
-    // Register your own bindings
-  }
+  public register() {}
 
   public async boot() {
     Logger.info('App is booted')

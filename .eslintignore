@@ -1,1 +1,3 @@
 build
+# ignore prism.js
+resources/js/prism.js
