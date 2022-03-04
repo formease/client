@@ -13,13 +13,13 @@
 import 'reflect-metadata'
 import sourceMapSupport from 'source-map-support'
 import { Ignitor } from '@adonisjs/core/build/standalone'
-import * as admin from 'firebase-admin'
+/*import * as admin from 'firebase-admin'
 
 const account = require('./admin.json')
 
 export const firebaseApp = admin.initializeApp({
   credential: admin.credential.cert(account),
-})
+})*/
 
 sourceMapSupport.install({ handleUncaughtExceptions: false })
 

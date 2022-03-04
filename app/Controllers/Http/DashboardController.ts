@@ -1,6 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
-import { firebaseApp } from '../../../server'
+import * as firebaseApp from '@ioc:Firebase'
 
 export default class DashboardController {
   public async index(ctx: HttpContextContract) {
