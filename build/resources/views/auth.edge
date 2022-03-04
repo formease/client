@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    @include('partials/head')
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{{asset('assets/register.css')}}" />
+    <script src="{{asset('assets/register.js')}}" type="module"></script>
+    <title>FormEase | Register</title>
+  </head>
+  <body id="auth-page">
+    <main>
+      <div class="back-div">
+        <div class="theme-switcher-container">
+          <button id="light-button" title="Change to light theme">Light</button>|<button id="dark-button" title="Change to dark theme">
+            Dark
+          </button>
+        </div>
+        <a href="/">Go back home &bkarow; </a>
+      </div>
+      <div>
+        <section class="register">
+          <h1>Join Us</h1>
+          <div class="register__main">
+            <button id="google_auth">Join with Google <img src="{{ asset('assets/images/google-logo.png') }}" alt=""></button><button id="github_auth">Join with Github <img src="{{ asset('assets/images/github-logo.png') }}" alt=""></button>
+          </div>
+        </section>   
+      </div>
+    </main>
+  </body>
+</html>

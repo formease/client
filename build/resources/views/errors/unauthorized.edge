@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ asset('assets/error.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/avatar.png') }}" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --body-bg: hsl(26 79% 90%);
+            --h1-clr: hsl(26 79% 55%);
+            --h1-txt-shadow: hsl(26 79% 40% / .5);
+            --h2-clr: hsl(29deg 72% 34%);
+            --content-clr: hsl(29deg 72% 25%);
+            --selection-bg: hsl(26 79% 60%);
+        }
+
+        main {
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            font-size: clamp(12rem, 25vw, 18rem);
+            position: static;
+            transform: none;
+        }
+
+        main img {
+            max-width: 60%;
+            transform: none;
+            display: block;
+            margin-inline: auto;
+        }
+
+        section {
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            text-align: end;
+            padding-inline: 5em 2em;
+        }
+        h2 {
+            font-size: 1.8rem;
+        }
+        p {
+            max-width: none;
+            font-size: 1.32rem;
+        }
+        @media (max-width: 55em) {
+            h1 {
+                position: absolute;
+                top: 45%;
+                transform: translate(-50%, -50%);
+                opacity: .4;
+                font-size: clamp(14rem, 40vw, 20rem);
+            }
+            main img {
+                max-width: 65%;
+            }
+            section {
+                padding-inline: .8em;
+            }
+            body {
+                overflow-x: hidden;
+            }
+        }
+    </style>
+
+    <title>Oops! | Forbidden!</title>
+</head>
+
+<body>
+    <main>
+        <section aria-label="Error 403 - ">
+            <h1 aria-hidden="true">403</h1>
+            <div class="wrapper">
+                <img src="{{ asset('assets/images/error-403.png') }}" alt="" width="600" height="600">
+                <h2>Caution! This Page is Cordoned Off</h2>
+                <p><strong>Forbidden!</strong> You don't have permission to check this page... I wonder what you have done!</p>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
