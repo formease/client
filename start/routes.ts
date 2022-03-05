@@ -30,6 +30,7 @@ Route.group(() => {
   Route.get('/dashboard/:id/:formid', 'DashboardController.user')
 })
 Route.post('/createForm', 'CreatesController.index')
+Route.post('/deleteForm', 'CreatesController.delete')
 
 Route.get('auth', async ({ view }) => {
   return view.render('auth')

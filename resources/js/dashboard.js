@@ -1,12 +1,7 @@
-import Swal from 'sweetalert2'
-import { mainInsert } from './templates.js'
 import {
   createProjectPopUp,
-  deleteProject,
   descriptionError,
-  editProject,
   projectSuccess,
-  titleCollision,
   titleError,
   webhookInput,
 } from './pop-up.js'
@@ -14,8 +9,6 @@ import { sendRequest } from './send.js'
 import '../css/dashboard.css'
 
 const createProjectBtn = document.querySelector('[data-create-project-btn]')
-const projectList = document.getElementById('project-list')
-const mainWrapper = document.querySelector('.main__wrapper')
 
 createProjectBtn.addEventListener('click', async function (e) {
   if (e.defaultPrevented) return
@@ -44,4 +37,11 @@ createProjectBtn.addEventListener('click', async function (e) {
     // file deepcode ignore OR: <Not required>
     document.location.href = `/dashboard/${localStorage.getItem('user')}/${result.data.id}`
   }
+})
+
+document.querySelectorAll('[data-form]').forEach((form) => {
+  form.addEventListener('click', async (e) => {
+    const id = form.dataset.form
+    document.location.href = `/dashboard/${localStorage.getItem('user')}/${id}`
+  })
 })

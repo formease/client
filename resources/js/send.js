@@ -17,3 +17,22 @@ export const sendRequest = async (request) => {
   }
   return response.json()
 }
+
+export const deleteRequest = async (request) => {
+  const sendBody = {
+    request: request,
+    user: localStorage.getItem('user'),
+  }
+  const response = await fetch('/deleteForm', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(sendBody),
+  })
+  if (response.status !== 202) {
+    projectFail()
+    throw new Error(`Error: ${response.status} - ${response.statusText}`)
+  }
+  return response.json()
+}

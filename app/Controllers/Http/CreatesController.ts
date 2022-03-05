@@ -19,11 +19,18 @@ export default class CreatesController {
       discord: `${ctx.request.body().request['Discord Webhook Support'] ? discordWebhook : null}`,
       sheets: `${ctx.request.body().request['Google Support'] ? 'done' : null}`,
     })
-    return ctx.response.send({
-      status: 200,
+    return ctx.response.accepted({
       data: {
-        message: 'Project created successfully',
+        message: 'Project created successfully !!!',
         id: formId,
+      },
+    })
+  }
+  public async delete(ctx: HttpContextContract) {
+    console.log(ctx.request.body())
+    return ctx.response.accepted({
+      data: {
+        message: 'Project deleted successfully !!!',
       },
     })
   }

@@ -2,52 +2,57 @@
   "entrypoints": {
     "register": {
       "css": [
-        "/assets/register.9342b074.css"
+        "http://localhost:8080/assets/register.css"
       ],
       "js": [
-        "/assets/register.d043512b.js"
+        "http://localhost:8080/assets/register.js"
       ]
     },
     "dashboard": {
       "css": [
-        "/assets/dashboard.5deec5b5.css"
+        "http://localhost:8080/assets/dashboard.css"
       ],
       "js": [
-        "/assets/dashboard.6cce1301.js"
+        "http://localhost:8080/assets/dashboard.js"
       ]
     },
     "dash_auth": {
       "js": [
-        "/assets/dash_auth.c45277d0.js"
+        "http://localhost:8080/assets/dash_auth.js"
       ]
     },
     "main": {
       "css": [
-        "/assets/main.ea36b529.css"
+        "http://localhost:8080/assets/main.css"
       ],
       "js": [
-        "/assets/main.5039f0c4.js"
+        "http://localhost:8080/assets/main.js"
       ]
     },
     "prism": {
       "css": [
-        "/assets/prism.ee9c60c3.css"
+        "http://localhost:8080/assets/prism.css"
       ],
       "js": [
-        "/assets/prism.0ec38a41.js"
+        "http://localhost:8080/assets/prism.js"
       ]
     },
     "error": {
       "css": [
-        "/assets/error.e4d931c1.css"
+        "http://localhost:8080/assets/error.css"
       ],
       "js": [
-        "/assets/error.31d6cfe0.js"
+        "http://localhost:8080/assets/error.js"
       ]
     },
     "theme": {
       "js": [
-        "/assets/theme.438131c4.js"
+        "http://localhost:8080/assets/theme.js"
+      ]
+    },
+    "project": {
+      "js": [
+        "http://localhost:8080/assets/project.js"
       ]
     }
   }

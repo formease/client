@@ -54,6 +54,7 @@ Encore.addEntries({
   prism: './resources/js/prism.js',
   error: './resources/css/error.css',
   theme: './resources/js/theme.js',
+  project: './resources/js/project.js',
 })
 
 /*
