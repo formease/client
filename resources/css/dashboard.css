@@ -63,7 +63,7 @@ header {
   background: hsla(var(--primary-bg), 0.8);
   color: white;
   grid-area: 1 / 1 / 2 / span 2;
-  border-radius: 0 0 0.25em 0;
+  border-radius: 0 0 0.25em;
 }
 aside {
   position: absolute;
@@ -123,7 +123,7 @@ nav > a:hover {
   display: flex;
   flex-direction: column;
   gap: 0.8em;
-  box-shadow: 0px 0px 2px rgb(36 36 36);
+  box-shadow: 0 0 2px rgb(36 36 36);
   white-space: nowrap;
   z-index: 100;
 }
