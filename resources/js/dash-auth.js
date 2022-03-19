@@ -9,6 +9,16 @@ import 'regenerator-runtime/runtime'
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('User is signed in')
+      user
+        .getIdToken(true)
+        .catch((error) => {
+          console.error(error)
+        })
+        .then((token) => {
+          document.cookie = `user_verification=${token};expires = ${new Date(
+            new Date().getTime() + 60 * 60 * 1000
+          ).toUTCString()}`
+        })
       document.getElementById('user_profile_photo').src = user.photoURL
     } else {
       console.info('no user')

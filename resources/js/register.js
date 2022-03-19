@@ -50,6 +50,16 @@ const runner = async () => {
       console.log('User is signed in')
       localStorage.setItem('user', user.uid)
       document.location.href = '/dashboard'
+      user
+        .getIdToken(true)
+        .catch((error) => {
+          console.error(error)
+        })
+        .then((token) => {
+          document.cookie = `user_verification=${token};expires = ${new Date(
+            new Date().getTime() + 60 * 60 * 1000
+          ).toUTCString()}`
+        })
     } else {
       document.querySelector('main').style.display = 'block'
       console.info('no user')
