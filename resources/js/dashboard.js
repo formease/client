@@ -35,13 +35,13 @@ createProjectBtn.addEventListener('click', async function (e) {
     let result = await sendRequest(data)
     projectSuccess()
     // file deepcode ignore OR: <Not required>
-    document.location.href = `/dashboard/${localStorage.getItem('user')}/${result.data.id}`
+    document.location.href = `/dashboard/f/${result.data.id}`
   }
 })
 
 document.querySelectorAll('[data-form]').forEach((form) => {
   form.addEventListener('click', async (e) => {
     const id = form.dataset.form
-    document.location.href = `/dashboard/${localStorage.getItem('user')}/${id}`
+    document.location.href = `/dashboard/f/${id}`
   })
 })

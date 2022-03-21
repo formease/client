@@ -2,7 +2,6 @@ import { projectFail } from './pop-up.js'
 export const sendRequest = async (request) => {
   const sendBody = {
     request: request,
-    user: localStorage.getItem('user'),
   }
   const response = await fetch('/createForm', {
     method: 'POST',
@@ -11,7 +10,8 @@ export const sendRequest = async (request) => {
     },
     body: JSON.stringify(sendBody),
   })
-  if (response.status !== 200) {
+  console.log(response.status)
+  if (response.status !== 202) {
     projectFail()
     throw new Error(`Error: ${response.status} - ${response.statusText}`)
   }
@@ -21,7 +21,6 @@ export const sendRequest = async (request) => {
 export const deleteRequest = async (request) => {
   const sendBody = {
     request: request,
-    user: localStorage.getItem('user'),
   }
   const response = await fetch('/deleteForm', {
     method: 'POST',
