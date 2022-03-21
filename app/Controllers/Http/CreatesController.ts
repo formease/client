@@ -29,7 +29,13 @@ export default class CreatesController {
     })
   }
   public async delete(ctx: HttpContextContract) {
-    console.log(ctx.request.body())
+    const userid = ctx.request.cookiesList()['user']
+    const verify = await firebaseApp.auth().verifyIdToken(userid)
+    if (!verify.uid) return ctx.view.render('errors/unauthorized')
+    await Database.from('users')
+      .where('uid', verify.uid)
+      .where('formId', ctx.request.body().request)
+      .delete()
     return ctx.response.accepted({
       data: {
         message: 'Project deleted successfully !!!',

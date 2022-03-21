@@ -7,16 +7,16 @@ document.querySelector('[data-projectEdit-btn]').addEventListener('click', async
 })
 document.querySelector('[data-projectDelete-btn]').addEventListener('click', async () => {
   const documentUrl = document.location.href
-  const projectId = documentUrl.split('/')[5]
-  console.log(projectId)
+  const projectId = documentUrl.split('/')[4]
   const done = await deleteRequest(projectId)
-  Swal.fire({
+  await Swal.fire({
     toast: true,
     icon: 'success',
     title: 'Project deleted',
     text: `${done.data.message}`,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 1000,
   })
+  document.location.href = '/dashboard'
 })

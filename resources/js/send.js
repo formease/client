@@ -1,4 +1,4 @@
-import { projectFail } from './pop-up.js'
+import { projectFail, projectFailDelete } from './pop-up.js'
 export const sendRequest = async (request) => {
   const sendBody = {
     request: request,
@@ -30,7 +30,7 @@ export const deleteRequest = async (request) => {
     body: JSON.stringify(sendBody),
   })
   if (response.status !== 202) {
-    projectFail()
+    projectFailDelete()
     throw new Error(`Error: ${response.status} - ${response.statusText}`)
   }
   return response.json()
