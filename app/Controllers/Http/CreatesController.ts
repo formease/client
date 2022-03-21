@@ -1,18 +1,20 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 import { v4 as uuidv4 } from 'uuid'
+import * as firebaseApp from '@ioc:Firebase'
 
 export default class CreatesController {
   public async index(ctx: HttpContextContract) {
-    const { user } = ctx.request.body()
+    const verify = await firebaseApp.auth().verifyIdToken(ctx.request.cookiesList()['user'])
+    if (!verify.uid) return ctx.view.render('errors/unauthorized')
     const { projectName, projectDescription, discordWebhook } = ctx.request.body().request
-    const data = await Database.from('users').where('uid', user)
+    const data = await Database.from('users').where('uid', verify.uid)
     if (data.length === 5) {
       return ctx.response.status(403).send('You have reached the maximum number of projects')
     }
     const formId = uuidv4()
     await Database.table('users').insert({
-      uid: `${user}`,
+      uid: `${verify.uid}`,
       formId: formId,
       name: `${projectName}`,
       description: `${projectDescription}` ? `${projectDescription}` : '',
