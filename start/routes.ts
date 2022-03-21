@@ -31,6 +31,9 @@ Route.group(() => {
 Route.post('/createForm', 'CreatesController.index')
 Route.post('/deleteForm', 'CreatesController.delete')
 
+// Recieve data from form
+Route.post('/f/:formid', 'FormsController.index')
+
 Route.get('auth', async ({ view }) => {
   return view.render('auth')
 })
