@@ -26,10 +26,13 @@ Route.get('/', async ({ view }) => {
 
 Route.group(() => {
   Route.get('/dashboard', 'DashboardController.index')
-  Route.get('/dashboard/f/:formid', 'DashboardController.user')
+  Route.get('/dashboard/:formid', 'DashboardController.user')
 })
 Route.post('/createForm', 'CreatesController.index')
 Route.post('/deleteForm', 'CreatesController.delete')
+
+// Recieve data from form
+Route.post('/f/:formid', 'FormsController.index')
 
 Route.get('auth', async ({ view }) => {
   return view.render('auth')

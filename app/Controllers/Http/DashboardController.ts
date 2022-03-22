@@ -22,7 +22,10 @@ export default class DashboardController {
     try {
       const verify = await firebaseApp.auth().verifyIdToken(ctx.request.cookiesList()['user'])
       if (!verify.uid) return ctx.view.render('errors/unauthorized')
-      data = await Database.from('users').where('formid', ctx.params.formid)
+      data = await Database.from('users')
+        .where('formid', ctx.params.formid)
+        .where('uid', verify.uid)
+      if (data.length === 0) return ctx.view.render('errors/unauthorized')
       list = await Database.from('users').where('uid', verify.uid)
       return ctx.view.render('project', {
         list: list,

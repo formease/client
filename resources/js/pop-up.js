@@ -118,6 +118,17 @@ export const projectFail = () => {
     timerProgressBar: true,
   })
 }
+export const projectFailDelete = () => {
+  Swal.fire({
+    toast: true,
+    icon: 'error',
+    title: 'Project cannot be deleted!',
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+  })
+}
 
 export const editProject = async (data) => {
   return await Swal.fire({
