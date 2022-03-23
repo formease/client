@@ -31,7 +31,8 @@ body {
 
 body > * {
   width: inherit;
-  padding-inline: var(--default-gap);
+  padding-left: var(--default-gap);
+  padding-right: var(--default-gap);
 }
 
 /* globals */
@@ -66,8 +67,10 @@ header,
 nav > ul {
   display: flex;
   justify-content: space-around;
-  gap: var(--default-gap);
   align-items: center;
+}
+nav > ul > :not(:first-child), header > :not(:first-child) {
+  margin-left: var(--default-gap);
 }
 header img {
   max-width: 2em;
@@ -100,11 +103,11 @@ pre {
 }
 /* nav-buttons */
 .user-button {
-  display: flex;
-  gap: var(--default-gap);
+  display: block;
 }
 .user-button > a,
 .footer__signup_btn {
+  display: block;
   padding: 0.8em 1.4em;
   background: var(--secondary-bg);
   border-radius: 0.5em;
@@ -115,33 +118,39 @@ pre {
   transform: scale(0.98);
 }
 .user-button > a {
-  padding-inline: 3em;
+  padding-left: 3em;
+  padding-right: 3em;
 }
 
 /* main section */
 main {
   scroll-margin: 5em;
-  padding-block: 2em;
+  padding-top: 2em;
+  padding-bottom: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: min(95vw, 55em);
-  margin-inline: auto;
+  margin: 0 auto;
 }
 .landing-section {
   width: inherit;
 }
-.landing-section :is(h1, h2, p) {
+.landing-section h1, .landing-section h2, .landing-section p  {
   text-align: center;
-  padding-inline: var(--default-gap);
+  padding-left: var(--default-gap);
+  padding-right: var(--default-gap);
 }
 .landing-section,
 .example-section {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: var(--default-gap);
 }
+.landing-section > :not(:first-child), .example-section  > :not(:first-child) {
+  margin-top: var(--default-gap)
+}
+.landing-section, 
 .example-section {
   width: 100%;
 }
@@ -154,7 +163,6 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: max-content 1fr;
-  gap: 2em;
   padding: 3em 2em;
   margin-block: var(--default-gap);
   border: 0.2rem solid hsl(67deg 14% 64%);
@@ -164,10 +172,18 @@ main {
   grid-column: span 3;
   justify-self: center;
 }
+.secondary-info > :not(:first-child) {
+  margin-left: 2em;
+}
+.secondary-info > :first-child {
+  margin-bottom: 1em;
+}
 .card {
   display: grid;
-  gap: 1em;
   text-align: center;
+}
+.card > :last-child {
+  margin-top: 1em;
 }
 
 /* footer */
@@ -175,10 +191,12 @@ footer {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 2em;
   padding-block: var(--default-gap);
   border-radius: 0.6em;
   background: var(--secondary-bg);
+}
+footer > *:not(:first-child) {
+  margin-top: 2em;
 }
 footer > .logo {
   font-size: var(--step-2);
@@ -189,7 +207,9 @@ footer > .logo {
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: var(--default-gap);
+}
+.footer__signup > *:not(:first-child) {
+  margin-top: var(--default-gap);
 }
 .footer__signup_btn {
   padding: 1em 3em;
@@ -205,6 +225,10 @@ footer > .logo {
   nav > ul {
     flex-direction: column;
   }
+  nav > ul > :not(:first-child), header > :not(:first-child) {
+    margin-left: 0;
+    margin-top: var(--default-gap) 
+  }
   nav > ul a {
     padding: 0.2em 4em;
   }
@@ -216,6 +240,10 @@ footer > .logo {
   .secondary-info {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+  }
+  .secondary-info > :not(:first-child) {
+    margin-left: 0;
+    margin-top: 2em;
   }
 
   .secondary-info > h2 {
