@@ -5,20 +5,20 @@
         "/assets/register.9342b074.css"
       ],
       "js": [
-        "/assets/register.d043512b.js"
+        "/assets/register.e4678c03.js"
       ]
     },
     "dashboard": {
       "css": [
-        "/assets/dashboard.5deec5b5.css"
+        "/assets/dashboard.e04d3a83.css"
       ],
       "js": [
-        "/assets/dashboard.6cce1301.js"
+        "/assets/dashboard.f58f1036.js"
       ]
     },
     "dash_auth": {
       "js": [
-        "/assets/dash_auth.c45277d0.js"
+        "/assets/dash_auth.99b31658.js"
       ]
     },
     "main": {
@@ -26,7 +26,7 @@
         "/assets/main.ea36b529.css"
       ],
       "js": [
-        "/assets/main.5039f0c4.js"
+        "/assets/main.53523985.js"
       ]
     },
     "prism": {
@@ -48,6 +48,11 @@
     "theme": {
       "js": [
         "/assets/theme.438131c4.js"
+      ]
+    },
+    "project": {
+      "js": [
+        "/assets/project.d307f287.js"
       ]
     }
   }
