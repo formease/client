@@ -125,7 +125,7 @@ img {
 @supports not(margin-inline: auto) {
   h1 {
     margin-top: .3em;
-    margin-top: 1.2em;
+    margin-bottom: 1.2em;
   }
   .back-div button {
     margin-left: 0.5em;
