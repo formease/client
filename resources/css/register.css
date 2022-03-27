@@ -121,6 +121,58 @@ img {
 .register__main > *:not(:first-child) {
   margin-top: var(--default-gap);
 }
+.js-disabled {
+  position: fixed;
+  left: 0; 
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: var(--primary-bg);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
+  padding: 1em;
+  line-height: 1.6;
+}
+.js-disabled__paragraph {
+  max-width: 60ch;
+  text-align: center;
+}
+.js-disabled__paragraph > strong {
+  position: relative;
+}
+.js-disabled__paragraph > strong::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: .2em;
+  background: black;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 200ms linear;
+}
+.js-disabled__paragraph > strong:hover::after {
+  transform: scaleX(1)
+}
+.js-disabled__paragraph > strong::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 150%;
+  left: 0;
+  box-shadow: 0 0.05em .5em rgba(0, 0, 0, 0.377);
+  border-radius: .4em;
+  padding: .5em 1em;
+  font-weight: 500;
+  line-height: 1.3;
+  display: none;
+}
+.js-disabled__paragraph > strong:hover::before {
+  display: block;
+}
 
 @supports not(margin-inline: auto) {
   h1 {
