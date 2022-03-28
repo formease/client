@@ -377,6 +377,73 @@ footer {
   margin-right: 1em;
 }
 
+/* noscript styles */
+.js-disabled {
+  position: fixed;
+  inset: 0;
+  background: var(--content-bg);
+  display: grid;
+  place-content: center;
+  gap: var(--default-gap);
+  z-index: 1000;
+  font-size: 1.3rem;
+  padding: var(--default-gap);
+  text-align: center;
+}
+.js-disabled::before, .js-disabled::after {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+.js-disabled::before {
+  content: "JS";
+  top: 30%;
+  left: 10%;
+  transform: translateY(-30%) rotate(-45deg);
+  font-size: 20rem;
+  opacity: .05;
+}
+.js-disabled::after {
+  content: "¯\\_(ツ)_/¯ enable js...";
+  right: 10%;
+  bottom: 20%;
+  font-size: 2.5rem;
+  opacity: .3;
+}
+.js-disabled .material-icons {
+  margin-left: .1em;
+  color: rgb(255, 58, 58);
+  vertical-align: middle;
+  font-size: 3.5rem;
+}
+.js-disabled__heading{
+  justify-self: center;
+  position: relative;
+  width: fit-content;
+  transition: 1s;
+}
+.js-disabled__heading::before{
+  content: '';
+  position: absolute;
+  inset: 0 -0.1em 0 -0.1em;
+  background: black;
+  transform-origin: bottom right;
+  transition: transform .3s;
+  transform: scaleX(0); 
+  z-index: -1;
+  opacity: .3;
+}
+html[data-theme="dark"] .js-disabled__heading::before {
+  background: white;
+}
+.js-disabled__heading:hover::before {
+  transform-origin: bottom left;
+  transform: scaleX(1);
+}
+.js-disabled__paragraph {
+  line-height: 1.6;
+}
+
 @media (min-width: 40em) {
   aside {
     position: static;
