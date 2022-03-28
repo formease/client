@@ -260,7 +260,7 @@ aside > ul {
   gap: var(--default-gap);
   position: relative;
 }
-#project-list > .createProject-msg {
+#project-list::before {
   content: "Start a new project first...";
   position: absolute;
   color: white;
@@ -269,9 +269,13 @@ aside > ul {
   pointer-events: none;
   user-select: none;
   z-index: -1;
+  display: none;
 }
-:root[data-theme="dark"] #project-list > .createProject-msg {
+:root[data-theme="dark"] #project-list::before {
   color: grey;
+}
+#project-list:empty::before {
+  display: block;
 }
 #project-list > li {
   padding: var(--default-gap);
