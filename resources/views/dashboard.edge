@@ -65,7 +65,6 @@
     </header>
     <aside>
       <ul id="project-list" role="tablist">
-        <span class="createProject-msg" aria-hidden="true">Start a new project first...</span>
         @each(data in data)
         <li data-project="{{data.name}}" data-form="{{ data.formId }}" role="tab" tabindex="0">{{data.name}}<small>{{data.description}}</small></li>
         @endeach
