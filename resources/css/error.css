@@ -33,24 +33,29 @@ main {
     width: min(95%, 40em);
     height: max-content;
 }
+.image-code-wrapper {
+    position: relative;
+}
 h1 {
     font-size: clamp(18rem, 30vw, 21.5rem);
-    position: absolute;
-    top: 48%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
     color: var(--h1-clr);
     text-shadow: .05em 0 var(--h1-txt-shadow);
+    line-height: 1;
+}
+.image-code-wrapper > img {
+    max-width: 70%; 
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    z-index: 20;
+    user-select: none;
+    pointer-events: none;
 }
 h2 {
     color: var(--h2-clr);
     font-size: 2rem;
     margin-bottom: .75em;
-}
-main  img {
-    max-width: 70%; 
-    transform: translateX(10%);
 }
 section {
     display: flex;
@@ -60,10 +65,9 @@ section {
 p {
     font-size: 1.5rem;
     color: var(--content-clr);
-    line-height: 1.6;
+    line-height: 1.65;
     max-width: 60ch;
 }
-
 a {
     color: var(--a-clr);
 }
@@ -71,9 +75,10 @@ a:hover {
     text-decoration: none;
 }
 @media (max-width: 35em) {
+    main {
+        text-align: center;
+    }
     h1 {
-        left: 45%;
         font-size: 13rem;
-        top: 40%;
     }
 }

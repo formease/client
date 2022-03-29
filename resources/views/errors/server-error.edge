@@ -15,15 +15,17 @@
 
     <style>
        :root {
-           --body-bg: hsl(230deg 100% 81% / 92%);
+           --body-bg: hsl(229deg 100% 81%);
            --h1-clr: hsl(234 100% 59% / 1);
            --h1-txt-shadow: hsl(234 100% 75% / 1);
            --h2-clr: hsl(230deg 23% 33%);
            --content-clr: hsl(234deg 98% 5%);
            --selection-bg: hsl(230deg 100% 95%);
        }
-       main img {
+
+       .image-code-wrapper > img {
            max-width: 80%;
+           left: 60%;
        }
     </style>
 
@@ -33,10 +35,12 @@
 <body>
     <main>
         <section aria-label="Error 500 - Server Error">
-            <h1 aria-hidden="true">500</h1>
-            <img src="{{ asset('assets/images/avatar.png') }}" width="600" height="600" alt="">
+            <div class="image-code-wrapper">
+                <h1>500</h1>
+                <img src="{{ asset('assets/images/avatar.png') }}" width="600" height="600" alt="">
+            </div>
             <h2>There's a Leak in the Website</h2>
-            <p>Looks like there is some problem with server, better to try again after few minutes..</p>
+            <p>Looks like there is some problem with server, better to try again after few minutes...</p>
         </section>
     </main>
 </body>

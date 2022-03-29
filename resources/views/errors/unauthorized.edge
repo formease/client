@@ -20,33 +20,35 @@
             --h1-txt-shadow: hsl(26 79% 40% / .5);
             --h2-clr: hsl(29deg 72% 34%);
             --content-clr: hsl(29deg 72% 25%);
-            --selection-bg: hsl(26 79% 60%);
+            --selection-bg: hsl(26 79% 60% / 80%);
         }
 
         main {
             width: 100%;
-            height: 100%;
         }
-
+        .image-code-wrapper {
+            margin-left: auto;
+        }
+        .content-wrapper {
+            margin-right: auto;
+        }
         h1 {
             font-size: clamp(12rem, 25vw, 18rem);
-            position: static;
-            transform: none;
         }
-
-        main img {
+        .content-wrapper > img {
             max-width: 60%;
-            transform: none;
-            display: block;
-            margin-inline: auto;
+            user-select: none;
+            pointer-events: none;
         }
-
+        .image-code-wrapper > img {
+            display: none;
+        }
         section {
             flex-direction: row;
             width: 100%;
             height: 100%;
             text-align: end;
-            padding-inline: 5em 2em;
+            padding-inline: 5em 4em;
         }
         h2 {
             font-size: 1.8rem;
@@ -57,17 +59,25 @@
         }
         @media (max-width: 55em) {
             h1 {
-                position: absolute;
-                top: 45%;
-                transform: translate(-50%, -50%);
-                opacity: .4;
+                opacity: .3;
                 font-size: clamp(14rem, 40vw, 20rem);
             }
-            main img {
-                max-width: 65%;
+            .content-wrapper > img {
+                display: none;
+            }
+            .image-code-wrapper > img {
+                display: inline-block;
+                max-width: 80%;
             }
             section {
                 padding-inline: .8em;
+                flex-direction: column;
+            }
+            .content-wrapper {
+                text-align: center;
+            }
+            .image-code-wrapper, .content-wrapper {
+                margin: 0;
             }
             body {
                 overflow-x: hidden;
@@ -81,8 +91,11 @@
 <body>
     <main>
         <section aria-label="Error 403 - ">
-            <h1 aria-hidden="true">403</h1>
-            <div class="wrapper">
+            <div class="image-code-wrapper">
+                <h1>403</h1>
+                <img src="{{ asset('assets/images/error-403.png') }}" alt="" width="600" height="600">
+            </div>
+            <div class="content-wrapper">
                 <img src="{{ asset('assets/images/error-403.png') }}" alt="" width="600" height="600">
                 <h2>Caution! This Page is Cordoned Off</h2>
                 <p><strong>Forbidden!</strong> You don't have permission to check this page... I wonder what you have done!</p>
