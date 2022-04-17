@@ -34,7 +34,6 @@ createProjectBtn.addEventListener('click', async function (e) {
   if (data && data.projectName.length >= 4 && data.projectName.length <= 40) {
     let result = await sendRequest(data)
     projectSuccess()
-    // file deepcode ignore OR: <Not required>
     document.location.href = `/dashboard/${result.data.id}`
   }
 })
