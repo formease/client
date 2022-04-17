@@ -1,4 +1,4 @@
-import { editProject } from './pop-up'
+import { editProject, deleteProject } from './pop-up'
 import { deleteRequest } from './send'
 import Swal from 'sweetalert2'
 
@@ -33,6 +33,8 @@ document.querySelector('[data-copy-btn]').addEventListener('click', () => {
 document.querySelector('[data-projectDelete-btn]').addEventListener('click', async () => {
   const documentUrl = document.location.href
   const projectId = documentUrl.split('/')[4]
+  const result = await deleteProject()
+  if (!result.value) return
   const done = await deleteRequest(projectId)
   await Swal.fire({
     toast: true,
