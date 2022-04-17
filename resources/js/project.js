@@ -7,7 +7,7 @@ document.querySelector('[data-projectEdit-btn]').addEventListener('click', async
 })
 document.querySelector('[data-inp-mode-btn]').addEventListener('click', async (e) => {
   if (e.target.innerText === 'Show link') {
-    document.getElementById('discord-webhook-link').type = 'text'
+    document.getElementById('discord-webhook-link').type = 'url'
     e.target.innerText = 'Hide link'
     return
   }
