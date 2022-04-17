@@ -15,9 +15,14 @@ export default class FormsController {
       const discord = dataFetch[0].discord
       const hook = new webhook.Webhook(discord)
       const message = new webhook.MessageBuilder()
-        .setName(`FormEase - (${dataFetch[0].name} reponse)`)
+        .setAvatar('https://i.imgur.com/XQ9QY.png')
+        .setName(`FormEase (${dataFetch[0].name})`)
+        .addField(
+          `**A new response has been recorded !!!**`,
+          `\`\`\`json\n${JSON.stringify(ctx.request.body(), null, 2)}\`\`\``
+        )
+        .addField('**Request IP**', ctx.request.ip())
         .setColor('#0099ff')
-        .setDescription(`\`\`\`json\n${JSON.stringify(ctx.request.body(), null, 2)}\`\`\``)
         .setTime()
       try {
         hook.send(message)
