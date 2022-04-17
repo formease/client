@@ -1,0 +1,1 @@
+{"version":3,"file":"FormsController.js","sourceRoot":"","sources":["../../../../app/Controllers/Http/FormsController.ts"],"names":[],"mappings":";;AAEA,MAAqB,eAAe;IAC3B,KAAK,CAAC,KAAK,CAAC,GAAwB;QACzC,OAAO,CAAC,GAAG,CAAC,GAAG,CAAC,OAAO,CAAC,IAAI,EAAE,CAAC,CAAA;QAC/B,GAAG,CAAC,QAAQ,CAAC,QAAQ,CAAC;YACpB,OAAO,EAAE,6BAA6B;SACvC,CAAC,CAAA;IACJ,CAAC;CACF;AAPD,kCAOC"}

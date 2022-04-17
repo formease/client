@@ -28,6 +28,7 @@
     <title>FormEase | Dashboard</title>
   </head>
   <body id="dashboard-page">
+    <noscript class="js-disabled"><h1 class="js-disabled__heading">Javascript is disabled!<span class="material-icons-outlined material-icons">report_problem</span></h1><p class="js-disabled__paragraph">Javascript is disabled, please enable Javascript to view this page.</p></noscript>
     <header>
       <button data-sidebar-toggler title="Open the projects sidebar">
         <span class="material-icons-outlined material-icons" >
@@ -65,7 +66,6 @@
     </header>
     <aside>
       <ul id="project-list" role="tablist">
-        <span class="createProject-msg" aria-hidden="true">Start a new project first...</span>
         @each(data in data)
         <li data-project="{{data.name}}" data-form="{{ data.formId }}" role="tab" tabindex="0">{{data.name}}<small>{{data.description}}</small></li>
         @endeach

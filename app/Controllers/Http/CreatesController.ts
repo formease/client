@@ -7,6 +7,15 @@ export default class CreatesController {
   public async index(ctx: HttpContextContract) {
     const verify = await firebaseApp.auth().verifyIdToken(ctx.request.cookiesList()['user'])
     if (!verify.uid) return ctx.view.render('errors/unauthorized')
+    console.log(ctx.request.body())
+    if (
+      !ctx.request.body().request['Discord Webhook Support'] &&
+      !ctx.request.body().request['Google Support']
+    ) {
+      return ctx.response.badRequest({
+        message: 'Please select atleast one option',
+      })
+    }
     const { projectName, projectDescription, discordWebhook } = ctx.request.body().request
     const data = await Database.from('users').where('uid', verify.uid)
     if (data.length === 5) {

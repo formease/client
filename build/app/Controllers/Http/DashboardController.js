@@ -28,10 +28,10 @@ class DashboardController {
     async index(ctx) {
         let data;
         try {
-            const verify = await firebaseApp.auth().getUser(ctx.params.id);
+            const verify = await firebaseApp.auth().verifyIdToken(ctx.request.cookiesList()['user']);
             if (!verify.uid)
                 return ctx.view.render('errors/unauthorized');
-            data = await Database_1.default.from('users').where('uid', ctx.params.id);
+            data = await Database_1.default.from('users').where('uid', verify.uid);
             return ctx.view.render('dashboard', {
                 data: data,
             });
@@ -44,11 +44,15 @@ class DashboardController {
         let data;
         let list;
         try {
-            const verify = await firebaseApp.auth().getUser(ctx.params.id);
+            const verify = await firebaseApp.auth().verifyIdToken(ctx.request.cookiesList()['user']);
             if (!verify.uid)
                 return ctx.view.render('errors/unauthorized');
-            data = await Database_1.default.from('users').where('formid', ctx.params.formid);
-            list = await Database_1.default.from('users').where('uid', ctx.params.id);
+            data = await Database_1.default.from('users')
+                .where('formid', ctx.params.formid)
+                .where('uid', verify.uid);
+            if (data.length === 0)
+                return ctx.view.render('errors/unauthorized');
+            list = await Database_1.default.from('users').where('uid', verify.uid);
             return ctx.view.render('project', {
                 list: list,
                 project: data[0],

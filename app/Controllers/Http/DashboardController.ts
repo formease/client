@@ -13,7 +13,7 @@ export default class DashboardController {
         data: data,
       })
     } catch (error) {
-      return ctx.view.render('errors/unauthorized')
+      console.log(error)
     }
   }
   public async user(ctx: HttpContextContract) {

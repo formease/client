@@ -13,7 +13,7 @@ export const sendRequest = async (request) => {
   console.log(response.status)
   if (response.status !== 202) {
     projectFail()
-    throw new Error(`Error: ${response.status} - ${response.statusText}`)
+    throw new Error(`Error: ${response.status} - ${response.message}`)
   }
   return response.json()
 }
@@ -31,7 +31,7 @@ export const deleteRequest = async (request) => {
   })
   if (response.status !== 202) {
     projectFailDelete()
-    throw new Error(`Error: ${response.status} - ${response.statusText}`)
+    throw new Error(`Error: ${response.status} - ${response.message}`)
   }
   return response.json()
 }

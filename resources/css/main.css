@@ -39,8 +39,8 @@ body > * {
       padding-right: var(--default-gap);
   }
   header {
-      padding-left: var(--default-gap);
-      padding-right: var(--default-gap);
+      padding-top: var(--default-gap);
+      padding-bottom: var(--default-gap);
   }
 }
 @supports (margin-inline: auto) {
@@ -52,12 +52,11 @@ body > * {
   }
 }
 
-
 header {
   background: linear-gradient(to bottom, var(--primary-bg) 5%, var(--secondary-bg));
   box-shadow: 0 0.1em 0.1em hsl(0, 0%, 61%);
   position: sticky;
-  inset: 0 0 auto 0;
+  top: 0;
   z-index: 100; 
   margin-top: 0.6em;
 }
@@ -109,10 +108,11 @@ pre {
   width: max-content;
   background: hsl(0, 0%, 69%);
   color: black;
-  border: .3em dotted hsl(0, 0%, 40%)
+  border: .3em ridge hsl(0, 0%, 40%)
 }
 .skip-link:hover {
-  opacity: .95;
+  opacity: 1;
+  background: hsl(0, 0%, 79%);
 }
 .skip-link:focus {
   outline: 0;
@@ -120,7 +120,7 @@ pre {
 }
 /* nav-buttons */
 .user-button > a,
-.footer__signup_btn {
+.footerSignup__link {
   display: inline-block;
   padding: 0.8em 1.4em;
   background: var(--secondary-bg);
@@ -128,7 +128,7 @@ pre {
   box-shadow: 0 0 0 0.1em hsl(67deg 14% 64%);
 }
 .user-button > a:active,
-.footer__signup_btn:active {
+.footerSignup__link:active {
   transform: scale(0.98);
 }
 
@@ -200,8 +200,8 @@ main {
 }
 @supports not(margin-inline: auto) {
   .secondary-info {
-    margin-left: var(--default-gap);
-    margin-right: var(--default-gap);
+    margin-top: var(--default-gap);
+    margin-bottom: var(--default-gap);
   }
 }
 @supports (margin-inline: auto) {
@@ -237,8 +237,8 @@ footer {
 }
 @supports not(margin-inline: auto) {
   footer {
-    margin-top: var(--default-gap);
-    margin-bottom: var(--default-gap);
+    padding-top: var(--default-gap);
+    padding-bottom: var(--default-gap);
   }
 }
 @supports (margin-inline: auto) {
@@ -249,24 +249,30 @@ footer {
 footer > *:not(:first-child) {
   margin-top: 2em;
 }
-footer > .logo {
+.footer__logo {
   font-size: var(--step-2);
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
-.footer__signup {
+.footerSignup {
   text-align: center;
   display: flex;
   flex-direction: column;
 }
-.footer__signup > *:not(:first-child) {
+.footerSignup > *:not(:first-child) {
   margin-top: var(--default-gap);
 }
-.footer__signup_btn {
+.footerSignup__link {
   padding: 1em 3em;
   background: var(--secondary-bg);
 }
 
+.js-disabled {
+  text-align: center;
+  color: rgb(255, 62, 62);
+  padding: 1em;
+  border-bottom: .4em solid;
+}
 
 /* size media queries */
 @media (max-width: 50em) {
