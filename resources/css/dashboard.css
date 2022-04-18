@@ -112,7 +112,6 @@ nav > a:hover {
   object-fit: cover;
 }
 .profile__tooltip {
-  visibility: hidden;
   position: absolute;
   top: calc(100% + 0.3em);
   right: 0;
@@ -126,13 +125,35 @@ nav > a:hover {
   box-shadow: 0 0 2px rgb(36 36 36);
   white-space: nowrap;
   z-index: 100;
+  display: none;
+}
+.profile__tooltip--closed {
+  display: flex;
+  animation: profile__tooltip--fadeout 150ms linear forwards;
+}
+.profile__tooltip--active {
+  display: flex;
+  animation: profile__tooltip--fadein 150ms linear both;
+}
+@keyframes profile__tooltip--fadein {
+  from {
+    transform: translateY(.5em);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes profile__tooltip--fadeout {
+  to {
+    transform: translateY(.5em);
+    opacity: 0;
+  }
 }
 .profile__tooltip > * + * {
   border-top: 0.15em solid var(--bdr-clr);
   padding-top: 0.5em;
-}
-.profile__tooltip--active {
-  visibility: visible;
 }
 .profile__tooltip::after {
   position: absolute;
