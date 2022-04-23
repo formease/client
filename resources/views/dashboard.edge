@@ -5,35 +5,36 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
 
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link
       href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
       rel="stylesheet"
       id="popup-dark-theme"
     />
 
-    <link rel="stylesheet" href="{{asset('assets/dashboard.css')}}" />
-    <script src="{{asset('assets/dashboard.js')}}" type="module"></script>
-    <script src="{{asset('assets/dash_auth.js')}}" type="module"></script>
-    <script src="{{asset('assets/theme.js')}}" type="module"></script>
+    <link rel="stylesheet" href="{{ asset('assets/dashboard.css') }}" />
+    <script src="{{ asset('assets/dashboard.js') }}" type="module"></script>
+    <script src="{{ asset('assets/dash_auth.js') }}" type="module"></script>
+    <script src="{{ asset('assets/theme.js') }}" type="module"></script>
 
     <title>FormEase | Dashboard</title>
   </head>
   <body id="dashboard-page">
-    <noscript class="js-disabled"><h1 class="js-disabled__heading">Javascript is disabled!<span class="material-icons-outlined material-icons">report_problem</span></h1><p class="js-disabled__paragraph">Javascript is disabled, please enable Javascript to view this page.</p></noscript>
+    <noscript class="js-disabled"
+      ><h1 class="js-disabled__heading">
+        Javascript is disabled!<span class="material-icons-outlined material-icons"
+          >report_problem</span
+        >
+      </h1>
+      <p class="js-disabled__paragraph">
+        Javascript is disabled, please enable Javascript to view this page.
+      </p></noscript
+    >
     <header>
       <button data-sidebar-toggler title="Open the projects sidebar">
-        <span class="material-icons-outlined material-icons" >
-          chevron_right
-        </span>
+        <span class="material-icons-outlined material-icons"> chevron_right </span>
       </button>
       <nav><a href="/">Home</a><a href="#">Pricing</a></nav>
       <button
@@ -46,20 +47,18 @@
       </button>
       <div class="profile-wrapper">
         <div role="button" aria-label="Click to open profile tooltip">
-          <img 
+          <img
             src="{{ asset('assets/images/avatar.png') }}"
             alt="profile_photo"
             id="user_profile_photo"
           />
           <button class="logout-btn">
-            <span class="material-icons-outlined material-icons">
-              arrow_drop_down
-            </span>
+            <span class="material-icons-outlined material-icons"> arrow_drop_down </span>
           </button>
         </div>
 
         <div class="profile__tooltip">
-          <button data-logout-btn >Logout</button>
+          <button data-logout-btn>Logout</button>
           <small>Let's create something</small>
         </div>
       </div>
@@ -67,7 +66,9 @@
     <aside>
       <ul id="project-list" role="tablist">
         @each(data in data)
-        <li data-project="{{data.name}}" data-form="{{ data.formId }}" role="tab" tabindex="0">{{data.name}}<small>{{data.description}}</small></li>
+        <li data-project="{{ data.name }}" data-form="{{ data.formId }}" role="tab" tabindex="0">
+          {{ data.name }}<small>{{ data.description }}</small>
+        </li>
         @endeach
       </ul>
     </aside>

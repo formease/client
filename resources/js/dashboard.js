@@ -44,3 +44,12 @@ document.querySelectorAll('[data-form]').forEach((form) => {
     document.location.href = `/dashboard/${id}`
   })
 })
+
+const childProjects = document.getElementById('project-list').childNodes
+if (childProjects.length === 1) {
+  while (document.getElementById('project-list').firstChild) {
+    document
+      .getElementById('project-list')
+      .removeChild(document.getElementById('project-list').firstChild)
+  }
+}
