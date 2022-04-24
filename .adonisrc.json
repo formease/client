@@ -24,7 +24,8 @@
     "@adonisjs/view",
     "@adonisjs/shield",
     "@adonisjs/lucid",
-    "./providers/FirebaseProvider"
+    "./providers/FirebaseProvider",
+    "./providers/GoogleDriveProvider"
   ],
   "metaFiles": [
     {
