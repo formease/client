@@ -1,7 +1,7 @@
 import { FirebaseInit } from './auth'
 import {
   getAuth,
-  signInWithRedirect,
+  signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
   GithubAuthProvider,
@@ -67,12 +67,12 @@ const runner = async () => {
   document.getElementById('google_auth').addEventListener('click', () => {
     const auth = getAuth()
     const provider = new GoogleAuthProvider()
-    signInWithRedirect(auth, provider)
+    signInWithPopup(auth, provider)
   })
   document.getElementById('github_auth').addEventListener('click', () => {
     const provider = new GithubAuthProvider()
     const auth = getAuth()
-    signInWithRedirect(auth, provider)
+    signInWithPopup(auth, provider)
   })
 }
 runner()

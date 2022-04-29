@@ -56,9 +56,24 @@ THEME_BTN.addEventListener('click', () => {
 })
 
 // profile tooltip toggler
-const profileWrapper = document.querySelector('.profile-wrapper')
+const profileWrapper = document.querySelector('.profile-wrapper');
+const profileTooltip = profileWrapper.querySelector('.profile__tooltip');
+
 profileWrapper.addEventListener('click', function () {
-  profileWrapper.querySelector('.profile__tooltip').classList.toggle('profile__tooltip--active')
+  const profileTooltipActive = profileTooltip.classList.contains('profile__tooltip--active')
+  
+  if (profileTooltipActive) {
+    profileTooltip.classList.remove("profile__tooltip--active");
+    profileTooltip.classList.add("profile__tooltip--closed");
+
+    profileTooltip.addEventListener('animationend', () => {
+      profileTooltip.classList.remove("profile__tooltip--closed");
+    }, {once: true})
+    return;
+  }
+
+  profileTooltip.classList.remove("profile__tooltip--closed")
+  profileTooltip.classList.add("profile__tooltip--active")
 })
 
 // sidebar toggler
