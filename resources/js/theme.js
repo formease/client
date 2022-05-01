@@ -56,24 +56,28 @@ THEME_BTN.addEventListener('click', () => {
 })
 
 // profile tooltip toggler
-const profileWrapper = document.querySelector('.profile-wrapper');
-const profileTooltip = profileWrapper.querySelector('.profile__tooltip');
+const profileWrapper = document.querySelector('.profile-wrapper')
+const profileTooltip = profileWrapper.querySelector('.profile__tooltip')
 
 profileWrapper.addEventListener('click', function () {
   const profileTooltipActive = profileTooltip.classList.contains('profile__tooltip--active')
-  
-  if (profileTooltipActive) {
-    profileTooltip.classList.remove("profile__tooltip--active");
-    profileTooltip.classList.add("profile__tooltip--closed");
 
-    profileTooltip.addEventListener('animationend', () => {
-      profileTooltip.classList.remove("profile__tooltip--closed");
-    }, {once: true})
-    return;
+  if (profileTooltipActive) {
+    profileTooltip.classList.remove('profile__tooltip--active')
+    profileTooltip.classList.add('profile__tooltip--closed')
+
+    profileTooltip.addEventListener(
+      'animationend',
+      () => {
+        profileTooltip.classList.remove('profile__tooltip--closed')
+      },
+      { once: true }
+    )
+    return
   }
 
-  profileTooltip.classList.remove("profile__tooltip--closed")
-  profileTooltip.classList.add("profile__tooltip--active")
+  profileTooltip.classList.remove('profile__tooltip--closed')
+  profileTooltip.classList.add('profile__tooltip--active')
 })
 
 // sidebar toggler
@@ -95,11 +99,14 @@ document.addEventListener('click', (e) => {
 
 // service worker registration
 if (navigator.serviceWorker) {
-  navigator.serviceWorker.register("/service-worker.js").then(() => {
-    console.log("Service worker successfully registered")
-  }, () => {
-    console.log("Service worker failed to register")
-  })
+  navigator.serviceWorker.register('/service-worker.js').then(
+    () => {
+      console.log('Service worker successfully registered')
+    },
+    (err) => {
+      console.log('Service worker failed to register', err)
+    }
+  )
 } else {
   console.log("Service workers aren't supported")
 }
