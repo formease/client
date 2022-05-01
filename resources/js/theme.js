@@ -92,3 +92,14 @@ document.addEventListener('click', (e) => {
   if (target.closest('aside') || target.closest('[data-sidebar-toggler]')) return
   if (asideElem.classList.contains('active')) asideElem.classList.remove('active')
 })
+
+// service worker registration
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register("/service-worker.js").then(() => {
+    console.log("Service worker successfully registered")
+  }, () => {
+    console.log("Service worker failed to register")
+  })
+} else {
+  console.log("Service workers aren't supported")
+}
