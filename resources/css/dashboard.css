@@ -322,13 +322,25 @@ aside > ul {
 }
 footer {
   background: hsl(var(--primary-bg));
-  padding: .8em;
+  padding: .9em;
   text-align: center;
   color: white;
-  font-size: 1.2rem;
   grid-area: 3 / 1 / 4 / span 2;
   border-radius: 0 0.25em 0 0;
 }
+.footer-link {
+  --color: hsl(240, 100%, 27%);
+  --hover-color: hsl(195, 53%, 85%);
+  color: var(--color);
+}
+.footer-link:hover {
+  color: var(--hover-color)
+}
+html[data-theme="dark"] .footer-link  {
+  --color: hsl(240, 70%, 75%) ;
+  --hover-color: hsl(240, 70%, 90%);
+}
+
 [data-create-project-btn] {
   background: hsl(var(--primary-bg));
   align-self: flex-start;
