@@ -34,6 +34,10 @@ Route.post('/deleteForm', 'CreatesController.delete')
 // Recieve data from form
 Route.post('/f/:formid', 'FormsController.index')
 
+// API
+Route.get('/api/key', 'ApisController.auth')
+Route.post('/api/auth', 'ApisController.auth')
+
 Route.get('auth', async ({ view }) => {
   return view.render('auth')
 })
