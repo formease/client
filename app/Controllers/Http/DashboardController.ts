@@ -6,12 +6,20 @@ export default class DashboardController {
   public async index(ctx: HttpContextContract) {
     let data: Array<object>
     try {
+      if (!ctx.request.cookiesList()['user']) return ctx.response.redirect('/auth')
       const verify = await firebaseApp.auth().verifyIdToken(ctx.request.cookiesList()['user'])
       if (!verify.uid) return ctx.view.render('errors/unauthorized')
-      data = await Database.from('users').where('uid', verify.uid)
-      return ctx.view.render('dashboard', {
-        data: data,
-      })
+      try {
+        data = await Database.from('users').where('uid', verify.uid)
+        return ctx.view.render('dashboard', {
+          data: data,
+        })
+      } catch (error) {
+        return ctx.response.json({
+          message: 'Opps! Something went wrong',
+          error: error,
+        })
+      }
     } catch (error) {
       console.log(error)
     }

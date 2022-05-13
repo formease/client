@@ -36,7 +36,7 @@ Route.post('/f/:formid', 'FormsController.index')
 
 // API
 Route.get('/api/key', 'ApisController.auth')
-Route.post('/api/auth', 'ApisController.auth')
+Route.post('/api/client', 'ApisController.clientAuth')
 
 Route.get('auth', async ({ view }) => {
   return view.render('auth')

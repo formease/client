@@ -5,6 +5,7 @@ import * as firebaseApp from '@ioc:Firebase'
 
 export default class CreatesController {
   public async index(ctx: HttpContextContract) {
+    if (!ctx.request.cookiesList()['user']) return ctx.response.redirect('/auth')
     const verify = await firebaseApp.auth().verifyIdToken(ctx.request.cookiesList()['user'])
     if (!verify.uid) return ctx.view.render('errors/unauthorized')
     console.log(ctx.request.body())
