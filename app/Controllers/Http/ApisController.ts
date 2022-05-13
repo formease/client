@@ -11,7 +11,7 @@ export default class ApisController {
       if (!verify.uid) return ctx.response.redirect('/auth')
       const data = await Database.from('api').where('user', verify.uid)
       if (data.length === 0 && ctx.request.qs()['regenerate'] === true)
-        return ctx.response.json({
+        return ctx.response.status(400).json({
           message: 'Please register your API key',
         })
       if (ctx.request.qs()['regenerate'] === 'true') {
@@ -42,7 +42,7 @@ export default class ApisController {
   }
   public async clientAuth(ctx: HttpContextContract) {
     return ctx.response.json({
-      message: 'hello',
+      message: 'Hello World',
     })
   }
 }
